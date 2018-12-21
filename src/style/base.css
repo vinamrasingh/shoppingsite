@@ -1,0 +1,10 @@
+header{
+    height:15%;
+}
+section{
+    height: auto;
+}
+.grid-container{
+    display: grid;
+    
+}
