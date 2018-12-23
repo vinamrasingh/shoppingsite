@@ -85,16 +85,16 @@ class BannerComponent{
                 let flag=`${bannerData.enabled}`;
                 if(flag=="true"){
                     let markup =
-                    `<div role="banner" class="bannerContainer">
-                        <div class= "imageContainer" >
-                            <img src="${bannerData.imageUrl}" alt="">
-                        </div>
+                    `<section role="banner" class="bannerContainer">
+                        <article class= "imageContainer" >
+                            <img class = "bannerImage" src="${bannerData.imageUrl}" alt="">
+                        </article>
                         <article class="bannerContentContainer">
                             <h3>${bannerData.name}</h3>
                             <p>${bannerData.description}</p>
                             <button>Explore ${bannerData.key}</button>
                         </article>                    
-                    </div>`;
+                    </section>`;
 
                     $(this.parent).append(markup);
                 }
@@ -218,8 +218,12 @@ class HomeComponent {
         this.render();
     }
     render(){
+        let markUp=`<section id="carousel">
+
+        </section>`;
         $(this.parent)[0].innerHTML="";
-        this.carousel= new __WEBPACK_IMPORTED_MODULE_1__CarouselComponent__["a" /* default */](this.parent);
+        $(this.parent).html(markUp);
+        this.carousel= new __WEBPACK_IMPORTED_MODULE_1__CarouselComponent__["a" /* default */]("#carousel");
         this.banner = new __WEBPACK_IMPORTED_MODULE_0__BannerComponent__["a" /* default */](this.parent);
     }
 }
@@ -251,8 +255,8 @@ class CarouselComponent{
         
         <div id="carouselImage"></div>
        
-            <a class="prev" id="prevButton">&#10094;</a>
-            <a class="next" id="nextButton">&#10095;</a>
+            <a class="prev" id="prevButton">&#10094; PREV</a>
+            <a class="next" id="nextButton">NEXT &#10095;</a>
             
             
         </div>`;
@@ -315,9 +319,9 @@ class ImageCarouselComponent{
         let markup=`
         <div class="mySlides fade">
           
-          <div class="imageDiv">
-            <img  class="imageClass" src=${this.imgUrl} >
-          </div>
+          
+            <img src=${this.imgUrl} style="width:100%">
+          
           
         </div>`;
         $(this.parent).append(markup);

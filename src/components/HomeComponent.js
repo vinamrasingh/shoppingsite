@@ -14,8 +14,12 @@ export default class HomeComponent {
         this.render();
     }
     render(){
+        let markUp=`<section id="carousel">
+
+        </section>`;
         $(this.parent)[0].innerHTML="";
-        this.carousel= new CarouselComponent(this.parent);
+        $(this.parent).html(markUp);
+        this.carousel= new CarouselComponent("#carousel");
         this.banner = new BannerComponent(this.parent);
     }
 }

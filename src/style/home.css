@@ -5,17 +5,19 @@
 }
 
 .content .bannerContainer:nth-child(odd) .imageContainer{
-    flex:40%;
+    
     order:2;
 }
-/* 
-.bannerContainer article{
-    
-    
-} */
+
 .bannerContentContainer{
     flex:60%;
     justify-content: center;
     align-items: center;
     text-align: center;
+}
+.imageContainer{
+    flex:40%;
+}
+.bannerImage{
+    width:100%;
 }

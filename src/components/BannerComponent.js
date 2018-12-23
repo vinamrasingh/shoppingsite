@@ -14,16 +14,16 @@ export default class BannerComponent{
                 let flag=`${bannerData.enabled}`;
                 if(flag=="true"){
                     let markup =
-                    `<div role="banner" class="bannerContainer">
-                        <div class= "imageContainer" >
-                            <img src="${bannerData.imageUrl}" alt="">
-                        </div>
+                    `<section role="banner" class="bannerContainer">
+                        <article class= "imageContainer" >
+                            <img class = "bannerImage" src="${bannerData.imageUrl}" alt="">
+                        </article>
                         <article class="bannerContentContainer">
                             <h3>${bannerData.name}</h3>
                             <p>${bannerData.description}</p>
                             <button>Explore ${bannerData.key}</button>
                         </article>                    
-                    </div>`;
+                    </section>`;
 
                     $(this.parent).append(markup);
                 }

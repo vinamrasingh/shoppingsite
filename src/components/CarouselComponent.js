@@ -16,8 +16,8 @@ export default class CarouselComponent{
         
         <div id="carouselImage"></div>
        
-            <a class="prev" id="prevButton">&#10094;</a>
-            <a class="next" id="nextButton">&#10095;</a>
+            <a class="prev" id="prevButton">&#10094; PREV</a>
+            <a class="next" id="nextButton">NEXT &#10095;</a>
             
             
         </div>`;

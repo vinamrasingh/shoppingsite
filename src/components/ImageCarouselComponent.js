@@ -9,9 +9,9 @@ export default class ImageCarouselComponent{
         let markup=`
         <div class="mySlides fade">
           
-          <div class="imageDiv">
-            <img  class="imageClass" src=${this.imgUrl} >
-          </div>
+          
+            <img src=${this.imgUrl} style="width:100%">
+          
           
         </div>`;
         $(this.parent).append(markup);
