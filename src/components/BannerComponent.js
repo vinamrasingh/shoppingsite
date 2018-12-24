@@ -8,9 +8,11 @@ export default class BannerComponent{
         
     }
     render(){
+        let self;
         this.shoppingCartService.getBannerData().then((result)=>{
             let bannerData=result;
             result.forEach(bannerData => {
+                self={context: bannerData};
                 let flag=`${bannerData.enabled}`;
                 if(flag=="true"){
                     let markup =
@@ -27,8 +29,13 @@ export default class BannerComponent{
 
                     $(this.parent).append(markup);
                 }
-                
-
+                let buyItem=function(){
+                    new ItemAdd("#itemCount",this.context,"edit");
+                }
+                  $(this.parent).append(markUp);
+                  let boundFunc=openModal.bind(self);
+                  
+                  $('#edit_'+`${this.id}`).on('click',boundFunc);
             });
             
         });
