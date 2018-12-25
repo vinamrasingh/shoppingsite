@@ -32,11 +32,11 @@ export default class MainComponent{
             new ProductComponent(".content");
         }
         // $(this.parent).append(markUp);
-        let boundFuncHome=openHome.bind(self);
-        let boundFuncProduct=openProduct.bind(self);
+        // let boundFuncHome=openHome.bind(self);
+        // let boundFuncProduct=openProduct.bind(self);
           
-        $('.homeButton').on('click',boundFuncHome);
-        $('.productButton').on('click',boundFuncProduct);
+        // $('.homeButton').on('click',boundFuncHome);
+        // $('.productButton').on('click',boundFuncProduct);
         new HomeComponent(".content");
     }
     

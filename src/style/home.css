@@ -11,13 +11,27 @@
 
 .bannerContentContainer{
     flex:60%;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
 }
 .imageContainer{
     flex:40%;
+    align-items: center;
+    display: flex;
 }
 .bannerImage{
     width:100%;
+}
+.bannerButton{
+    background-color: #BD2A57;
+    color: white;
+    padding: 3%;
+    border: none;
+}
+
+@media (min-width: 990px){
+    
 }

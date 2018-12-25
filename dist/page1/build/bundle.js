@@ -143,8 +143,8 @@ class ProductComponent{
                     </article>
                     </section>
                     `;
-
                     $(this.parent).append(markup);
+                    
                 
 
             });
@@ -172,9 +172,11 @@ class BannerComponent{
         
     }
     render(){
+        let self;
         this.shoppingCartService.getBannerData().then((result)=>{
             let bannerData=result;
             result.forEach(bannerData => {
+                self={context: bannerData};
                 let flag=`${bannerData.enabled}`;
                 if(flag=="true"){
                     let markup =
@@ -185,14 +187,19 @@ class BannerComponent{
                         <article class="bannerContentContainer">
                             <h3>${bannerData.name}</h3>
                             <p>${bannerData.description}</p>
-                            <button>Explore ${bannerData.key}</button>
+                            <button type="button" class="bannerButton">Explore ${bannerData.key}</button>
                         </article>                    
                     </section>`;
 
                     $(this.parent).append(markup);
                 }
-                
-
+               /*  let buyItem=function(){
+                    new ItemAdd("#itemCount",this.context,"edit");
+                }
+                  $(this.parent).append(markUp);
+                  let boundFunc=openModal.bind(self);
+                  
+                  $('#edit_'+`${this.id}`).on('click',boundFunc); */
             });
             
         });
@@ -244,11 +251,11 @@ class MainComponent{
             new __WEBPACK_IMPORTED_MODULE_2__components_ProductComponent__["a" /* default */](".content");
         }
         // $(this.parent).append(markUp);
-        let boundFuncHome=openHome.bind(self);
-        let boundFuncProduct=openProduct.bind(self);
+        // let boundFuncHome=openHome.bind(self);
+        // let boundFuncProduct=openProduct.bind(self);
           
-        $('.homeButton').on('click',boundFuncHome);
-        $('.productButton').on('click',boundFuncProduct);
+        // $('.homeButton').on('click',boundFuncHome);
+        // $('.productButton').on('click',boundFuncProduct);
         new __WEBPACK_IMPORTED_MODULE_1__components_HomeComponent__["a" /* default */](".content");
     }
     

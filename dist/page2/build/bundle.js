@@ -143,8 +143,8 @@ class ProductComponent{
                     </article>
                     </section>
                     `;
-
                     $(this.parent).append(markup);
+                    
                 
 
             });

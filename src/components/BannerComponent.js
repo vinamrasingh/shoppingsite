@@ -23,19 +23,19 @@ export default class BannerComponent{
                         <article class="bannerContentContainer">
                             <h3>${bannerData.name}</h3>
                             <p>${bannerData.description}</p>
-                            <button>Explore ${bannerData.key}</button>
+                            <button type="button" class="bannerButton">Explore ${bannerData.key}</button>
                         </article>                    
                     </section>`;
 
                     $(this.parent).append(markup);
                 }
-                let buyItem=function(){
+               /*  let buyItem=function(){
                     new ItemAdd("#itemCount",this.context,"edit");
                 }
                   $(this.parent).append(markUp);
                   let boundFunc=openModal.bind(self);
                   
-                  $('#edit_'+`${this.id}`).on('click',boundFunc);
+                  $('#edit_'+`${this.id}`).on('click',boundFunc); */
             });
             
         });
