@@ -24,7 +24,6 @@ export default class BannerComponent{
                             <h3>${bannerData.name}</h3>
                             <p>${bannerData.description}</p>
                             <a class="bannerButton" href="#/products/${bannerData.id}">Explore ${bannerData.key}</a>
-                            <!--<button type="button" class="bannerButton">Explore ${bannerData.key}</button>-->
                         </article>                    
                     </section>`;
 

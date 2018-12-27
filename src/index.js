@@ -22,7 +22,6 @@ export default class MainComponent{
             let parsedURL = (request.resource ? '/' + request.resource : '/') + (request.id ? '/:id' : '') + (request.verb ? '/' + request.verb : '');
             let page = this.routes[parsedURL] ? this.routes[parsedURL] : Error404
             content.innerHTML =  new page(".content",request);
-            //await page.after_render();
         }
         window.addEventListener('hashchange',()=>{router();});
         window.addEventListener('load',()=>{router();});

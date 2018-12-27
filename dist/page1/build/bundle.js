@@ -148,7 +148,6 @@ class MainComponent{
             let parsedURL = (request.resource ? '/' + request.resource : '/') + (request.id ? '/:id' : '') + (request.verb ? '/' + request.verb : '');
             let page = this.routes[parsedURL] ? this.routes[parsedURL] : Error404
             content.innerHTML =  new page(".content",request);
-            //await page.after_render();
         }
         window.addEventListener('hashchange',()=>{router();});
         window.addEventListener('load',()=>{router();});
@@ -322,7 +321,6 @@ class BannerComponent{
                             <h3>${bannerData.name}</h3>
                             <p>${bannerData.description}</p>
                             <a class="bannerButton" href="#/products/${bannerData.id}">Explore ${bannerData.key}</a>
-                            <!--<button type="button" class="bannerButton">Explore ${bannerData.key}</button>-->
                         </article>                    
                     </section>`;
 
@@ -522,7 +520,7 @@ class CategoriesComponent{
                 let flag=`${categoryData.enabled}`;
                 if(flag=="true"){
                     let markup =
-                    `<article>
+                    `<article class="categoriesName">
                         <a href = "#/products/${categoryData.id}">${categoryData.name}</a>
                     </article>`;
 
@@ -570,7 +568,9 @@ class ProductComponent{
         <section class="productImageContainer">
             <img class="productImage" src = "${productData.imageURL}" alt="">
         </section>
+        <section class="descriptionContainer">
         <p class="productDescription">${productData.description}</p>
+        </section>
         <article class="mrpandbuy">
             <p class="mrp">MRP Rs.${productData.price}</p>
             <button class="productBuy" type="button">Buy Now</button>

@@ -6,6 +6,10 @@
     grid-column-start: 1;
     grid-column-end: 2;
 }
+.categoriesName{
+    padding: 10%;
+    border-bottom: gray solid;
+}
 .productsClass{
     grid-column-start: 2;
     grid-column-end: 6;
@@ -21,7 +25,7 @@
     background-color: white;
 }
 .productName{
-    flex: 20%;
+    /* flex: 20%; */
     font-size:1.5em;
     justify-content: center;
     align-content: center;
@@ -29,7 +33,7 @@
     text-align: center;
 }
 .productImageContainer{
-    flex:50%;
+    /* flex:50%; */
     justify-content: center;
     align-content: center;
     align-items: center;
@@ -42,9 +46,14 @@
     align-content: center;
     width: 100%;
 }
+.descriptionContainer{
+    flex-grow: 0;     /* do not grow   - initial value: 0 */
+flex-shrink: 0;   /* do not shrink - initial value: 1 */
+flex-basis: 5em;
+}
 .productDescription{
     /* margin:10%; */
-    flex:20%;
+    /* flex:20%; */
     justify-content: center;
     align-content: center;
     align-items: center;
@@ -52,11 +61,12 @@
     margin-right: 5%;
     background: lightgray;
     overflow: hidden;
-    height: 20%;
+     
+    /* height: 20%; */
 }
 .mrpandbuy{
     display: flex;
-    flex:10%;
+    /* flex:10%; */
     flex-direction: row;
     justify-content: center;
     align-content: center;

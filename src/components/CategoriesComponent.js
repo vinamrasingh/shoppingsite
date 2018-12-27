@@ -12,7 +12,7 @@ export default class CategoriesComponent{
                 let flag=`${categoryData.enabled}`;
                 if(flag=="true"){
                     let markup =
-                    `<article>
+                    `<article class="categoriesName">
                         <a href = "#/products/${categoryData.id}">${categoryData.name}</a>
                     </article>`;
 

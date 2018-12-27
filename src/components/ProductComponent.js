@@ -25,7 +25,9 @@ export default class ProductComponent{
         <section class="productImageContainer">
             <img class="productImage" src = "${productData.imageURL}" alt="">
         </section>
+        <section class="descriptionContainer">
         <p class="productDescription">${productData.description}</p>
+        </section>
         <article class="mrpandbuy">
             <p class="mrp">MRP Rs.${productData.price}</p>
             <button class="productBuy" type="button">Buy Now</button>
