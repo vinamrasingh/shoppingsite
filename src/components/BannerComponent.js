@@ -16,14 +16,15 @@ export default class BannerComponent{
                 let flag=`${bannerData.enabled}`;
                 if(flag=="true"){
                     let markup =
-                    `<section role="banner" class="bannerContainer">
+                    `<section role="banner" class="bannerContainer effect">
                         <article class= "imageContainer" >
                             <img class = "bannerImage" src="${bannerData.imageUrl}" alt="">
                         </article>
                         <article class="bannerContentContainer">
                             <h3>${bannerData.name}</h3>
                             <p>${bannerData.description}</p>
-                            <button type="button" class="bannerButton">Explore ${bannerData.key}</button>
+                            <a class="bannerButton" href="#/products/${bannerData.id}">Explore ${bannerData.key}</a>
+                            <!--<button type="button" class="bannerButton">Explore ${bannerData.key}</button>-->
                         </article>                    
                     </section>`;
 

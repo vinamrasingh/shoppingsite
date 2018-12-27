@@ -20,9 +20,14 @@ export default class ShoppingCartService{
         }catch(err){
             console.log(err);
         }
-    }async getProductsData(){
+    }async getProductsData(id){
         try{
-            const res = await fetch(this.productUrl);
+            let prodUrl = this.productUrl;
+            if(id!=0){
+                //const response=await fetch(`${this.url}?id=${id}`);
+                prodUrl= this.productUrl+"?category="+id;
+            }
+            const res = await fetch(prodUrl);
             return  res.json();
         }catch(err){
             console.log(err);

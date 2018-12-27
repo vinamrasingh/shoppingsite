@@ -10,6 +10,7 @@
     <link href="./src/style/home.css" rel="stylesheet" type="text/css" />
     <link href="./src/style/carouselStyle.css" rel="stylesheet" type="text/css" />
     <link href="./src/style/base.css" rel="stylesheet" type="text/css" />
+    <link href="./src/style/products.css" rel="stylesheet" type="text/css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
@@ -17,13 +18,12 @@
     <header class = "headerClass">
         <section class="headerLeft">
             <article class="headerLogo">
-                <img  class="headerLogoImage" src="../static/images/logo.png" alt=""></article>
+                <a href="/#/"><img  class="headerLogoImage" src="../static/images/logo.png" alt=""></a></article>
             <article class="nav-menu">
                 <nav>
-                    <ul>
-                        <li><a href="index.html" class="homeButton">Home</a></li>
-                        <li><a href="./products.html" class="productButton">Products</a></li>
-                    </ul>
+                
+                    <a  href="/#/" id="homeLink" class="homeButton">Home</a>
+                    <a  href="/#/products/0" id="productLink" class ="productButton">Products</a>
                 </nav>
             </article>
         </section>

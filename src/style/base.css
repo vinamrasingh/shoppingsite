@@ -1,3 +1,6 @@
+a{
+    text-decoration: none;
+}
 header{
     display: flex;
     flex-direction: row;
@@ -48,6 +51,9 @@ section{
         width:80%;
         margin-left: 10%;
         margin-right: 10%;
+    }
+    .nav-menu{
+        display: block;
     }
     .headerClass{
         width:80%;

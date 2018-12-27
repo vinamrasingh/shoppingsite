@@ -10,8 +10,9 @@ const path = require('path');
 }; */
 module.exports = {
   entry: {
-    'page1': './src/index.js',
-    'page2': './src/products.js'
+    'page1': './src/index.js'/* ,
+    'page2': './src/home.js',
+    'page3': './src/products.js' */
   },
   output: {
     path: path.resolve(__dirname,'dist'),
@@ -22,11 +23,16 @@ module.exports = {
       inject: true,
       
       filename: './index.html'
+    })/* ,
+    new HtmlWebpackPlugin({
+      inject: true,
+    
+      filename: './home.html'
     }),
     new HtmlWebpackPlugin({
       inject: true,
     
       filename: './products.html'
-    })
+    }) */
   ]
 };

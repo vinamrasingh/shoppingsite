@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -90,9 +90,14 @@ class ShoppingCartService{
         }catch(err){
             console.log(err);
         }
-    }async getProductsData(){
+    }async getProductsData(id){
         try{
-            const res = await fetch(this.productUrl);
+            let prodUrl = this.productUrl;
+            if(id!=0){
+                //const response=await fetch(`${this.url}?id=${id}`);
+                prodUrl= this.productUrl+"?category="+id;
+            }
+            const res = await fetch(prodUrl);
             return  res.json();
         }catch(err){
             console.log(err);
@@ -115,49 +120,178 @@ class ShoppingCartService{
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__service_shoppingCartService__ = __webpack_require__(0);
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_HomeComponent__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_ProductPage__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__service_Utils__ = __webpack_require__(9);
 
-class ProductComponent{
-    constructor(parent){
-        this.parent=parent;
-        this.shoppingCartService=new __WEBPACK_IMPORTED_MODULE_0__service_shoppingCartService__["a" /* default */];
+
+
+
+
+class MainComponent{
+    constructor(){
+        this.routes = {
+            '/':__WEBPACK_IMPORTED_MODULE_0__components_HomeComponent__["a" /* default */],
+            '/products/:id':__WEBPACK_IMPORTED_MODULE_1__components_ProductPage__["a" /* default */]
+        }
+        this.utils= new __WEBPACK_IMPORTED_MODULE_2__service_Utils__["a" /* default */]();
         this.render();
     }
     render(){
 
-        $(this.parent).html('');
-        this.shoppingCartService.getProductsData().then((result)=>{
-            result.forEach(productData => {
-                
-                    let markup =
 
-                    `<section class= "productContainer">
-                    <p class="productName">${productData.name}</p>
-                    <section class="productImageContainer">
-                        <img class="productImage" src = "${productData.imageURL}" alt="">
-                    </section>
-                    <p class="productDescription">${productData.description}</p>
-                    <article class="mrpandbuy">
-                        <p class="mrp">MRP Rs.${productData.price}</p>
-                        <button class="productBuy" type="button">Buy Now</button>
-                    </article>
-                    </section>
-                    `;
-                    $(this.parent).append(markup);
-                    
-                
-
-            });
-        });
-        
-
+        let router=()=>{
+            const content = document.getElementsByClassName('.content');
+    
+            let request = this.utils.parseRequestURL();
+            let parsedURL = (request.resource ? '/' + request.resource : '/') + (request.id ? '/:id' : '') + (request.verb ? '/' + request.verb : '');
+            let page = this.routes[parsedURL] ? this.routes[parsedURL] : Error404
+            content.innerHTML =  new page(".content",request);
+            //await page.after_render();
+        }
+        window.addEventListener('hashchange',()=>{router();});
+        window.addEventListener('load',()=>{router();});
     }
 }
-/* harmony export (immutable) */ __webpack_exports__["a"] = ProductComponent;
+/* harmony export (immutable) */ __webpack_exports__["default"] = MainComponent;
+
+new MainComponent();
+
+
+
+
+
+
+
+
+    /* getHome(){
+        return this.home;
+    }
+    getProduct(){
+        return this.product;
+    }
+    setHome(home){
+        this.homeActivated=home;
+    }
+    setProduct(product){
+        this.productActivated=product;
+    } */
+    /* render(){
+        
+        //homePage = new HomeComponent()
+        let routes={
+            '/': new HomeComponent(".content"),
+            '/home': new ProductComponent(".content")
+            //'/product':new ProductComponent(".productsClass")
+        }
+
+        let contentDiv = document.getElementsByClassName('.content');
+        //contentDiv.innerHTML = this.routes[window.location.pathname];
+        let linkArray =document.getElementsByTagName('a');
+        for (var i = 0; i < linkArray.length; i++) {
+            linkArray[i].addEventListener('click', (e)=>{
+                e.preventDefault();
+                let pathName =this.getPathName(e);
+                //window.location.pathname=pathName;
+                //onNavItemClick(pathName);   
+                console.log('pressed');
+            });
+          }
+        /* linkArray.forEach((aElement,index)=>{
+            aElement.addEventListener('click', ()=>{
+                this.preventDefault();
+                let pathName =this.getPathName(e);
+                window.location.pathname=pathName;
+                onNavItemClick(pathName);   
+                console.log('pressed');
+            });
+        }); */
+        /* let onNavItemClick = (pathName) => {
+            window.history.pushState(
+              {}, 
+              pathName,
+              window.location.origin + pathName
+            );
+            contentDiv.innerHTML = routes[pathName];
+        }
+        window.onpopstate = () => {
+            contentDiv.innerHTML = routes[window.location.pathname];
+        } */
+
+        /* const self={context: this};
+        let urlArray= this.url.split('/');
+        if(urlArray[urlArray.length]==''){
+            new HomeComponent(.content)
+        }
+        let openHome=function(){
+            
+            new HomeComponent(".content");
+        }
+        let openProduct=function(){
+            new ProductComponent(".content");
+        } */
+        // $(this.parent).append(markUp);
+        // let boundFuncHome=openHome.bind(self);
+        // let boundFuncProduct=openProduct.bind(self);
+          
+        // $('.homeButton').on('click',boundFuncHome);
+        // $('.productButton').on('click',boundFuncProduct);
+        //new HomeComponent(".content");
+    /*} */
+    /* getPathName(element){
+        if(element.srcElement.id =="homeLink"){
+            new HomeComponent(".content");
+            return "/home.html";
+        }
+        if(element.srcElement.id =="productLink"){
+            new ProductComponent(".content");
+            return "/product.html";
+        }
+    } */
+    
+
 
 
 /***/ }),
 /* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BannerComponent__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__CarouselComponent__ = __webpack_require__(4);
+//import MainComponent  from './components/MainComponent';
+
+
+
+
+
+class HomeComponent {
+    constructor(parent,request){
+        this.parent=parent;
+        this.request=request;
+        /* super();
+        if(super.getHome()){
+            this.render();
+        } */
+        this.render();
+    }
+    render(){
+        let markUp=`<section id="carousel">
+
+        </section>`;
+        // $(this.parent)[0].innerHTML="HI";
+        $(this.parent).html(markUp);
+        this.carousel= new __WEBPACK_IMPORTED_MODULE_1__CarouselComponent__["a" /* default */]("#carousel");
+        this.banner = new __WEBPACK_IMPORTED_MODULE_0__BannerComponent__["a" /* default */](this.parent);
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = HomeComponent;
+
+
+
+/***/ }),
+/* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -180,14 +314,15 @@ class BannerComponent{
                 let flag=`${bannerData.enabled}`;
                 if(flag=="true"){
                     let markup =
-                    `<section role="banner" class="bannerContainer">
+                    `<section role="banner" class="bannerContainer effect">
                         <article class= "imageContainer" >
                             <img class = "bannerImage" src="${bannerData.imageUrl}" alt="">
                         </article>
                         <article class="bannerContentContainer">
                             <h3>${bannerData.name}</h3>
                             <p>${bannerData.description}</p>
-                            <button type="button" class="bannerButton">Explore ${bannerData.key}</button>
+                            <a class="bannerButton" href="#/products/${bannerData.id}">Explore ${bannerData.key}</a>
+                            <!--<button type="button" class="bannerButton">Explore ${bannerData.key}</button>-->
                         </article>                    
                     </section>`;
 
@@ -209,103 +344,11 @@ class BannerComponent{
 
 
 /***/ }),
-/* 3 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_BannerComponent__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_HomeComponent__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ProductComponent__ = __webpack_require__(1);
-
-
-
-//import HomeComponent from './components/HomeComponent';
-
-class MainComponent{
-    constructor(){
-        this.homeActivated= true;
-        this.productActivated=false;
-        //this.banner = new BannerComponent('.grid-container');
-        this.render();
-    }
-    getHome(){
-        return this.home;
-    }
-    getProduct(){
-        return this.product;
-    }
-    setHome(home){
-        this.homeActivated=home;
-    }
-    setProduct(product){
-        this.productActivated=product;
-    }
-    render(){
-        const self={context: this};
-        let openHome=function(){
-            
-            new __WEBPACK_IMPORTED_MODULE_1__components_HomeComponent__["a" /* default */](".content");
-        }
-        let openProduct=function(){
-            new __WEBPACK_IMPORTED_MODULE_2__components_ProductComponent__["a" /* default */](".content");
-        }
-        // $(this.parent).append(markUp);
-        // let boundFuncHome=openHome.bind(self);
-        // let boundFuncProduct=openProduct.bind(self);
-          
-        // $('.homeButton').on('click',boundFuncHome);
-        // $('.productButton').on('click',boundFuncProduct);
-        new __WEBPACK_IMPORTED_MODULE_1__components_HomeComponent__["a" /* default */](".content");
-    }
-    
-}
-/* harmony export (immutable) */ __webpack_exports__["default"] = MainComponent;
-
-new MainComponent();
-
-
-/***/ }),
 /* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BannerComponent__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__CarouselComponent__ = __webpack_require__(5);
-//import MainComponent  from './components/MainComponent';
-
-
-
-
-
-class HomeComponent {
-    constructor(parent){
-        this.parent=parent;
-        /* super();
-        if(super.getHome()){
-            this.render();
-        } */
-        this.render();
-    }
-    render(){
-        let markUp=`<section id="carousel">
-
-        </section>`;
-        $(this.parent)[0].innerHTML="";
-        $(this.parent).html(markUp);
-        this.carousel= new __WEBPACK_IMPORTED_MODULE_1__CarouselComponent__["a" /* default */]("#carousel");
-        this.banner = new __WEBPACK_IMPORTED_MODULE_0__BannerComponent__["a" /* default */](this.parent);
-    }
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = HomeComponent;
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ImageCarouselComponent__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ImageCarouselComponent__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_shoppingCartService__ = __webpack_require__(0);
 
 
@@ -374,7 +417,7 @@ class CarouselComponent{
 ///showSlides(1);
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -398,6 +441,180 @@ class ImageCarouselComponent{
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = ImageCarouselComponent;
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CategoriesComponent__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ProductComponent__ = __webpack_require__(8);
+
+//import HomeComponent from './components/HomeComponent';
+
+//import HomeComponent from './components/HomeComponent';
+
+class ProductPage{
+    constructor(parent,request){
+        this.homeActivated= true;
+        this.productActivated=false;
+        this.parent ='.content';
+        this.request = request;
+        this.id= (this.request && this.request.id)?this.request.id : 0;
+        //this.banner = new BannerComponent('.grid-container');
+        this.render();
+    }
+    
+    render(){
+        const self={context: this};
+        
+        let markUp=`<section class="grid-container">
+                <aside class="categoriesClass"></aside>
+                <section class="productsClass"></section>
+        </section>`;
+        $(this.parent).html(markUp);
+        new  __WEBPACK_IMPORTED_MODULE_0__CategoriesComponent__["a" /* default */](".categoriesClass");
+        new __WEBPACK_IMPORTED_MODULE_1__ProductComponent__["a" /* default */](".productsClass",this.id);
+         
+    }
+    /* render(){
+        const self={context: this};
+        let openHome=function(){
+            
+            new HomeComponent(".content");
+        }
+        let openProduct=function(){
+            new ProductComponent(".content");
+        }
+        // $(this.parent).append(markUp);
+        let boundFuncHome=openHome.bind(self);
+        let boundFuncProduct=openProduct.bind(self);
+          
+        $('.homeButton').on('click',boundFuncHome);
+        $('.productButton').on('click',boundFuncProduct);
+        new HomeComponent(".content");
+    } */
+    
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = ProductPage;
+
+new ProductPage();
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__service_shoppingCartService__ = __webpack_require__(0);
+
+
+class CategoriesComponent{
+    constructor(parent){
+        this.parent=parent;
+        this.shoppingCartService=new __WEBPACK_IMPORTED_MODULE_0__service_shoppingCartService__["a" /* default */];
+        this.render();
+    }
+    render(){
+        this.shoppingCartService.getCategoriesData().then((result)=>{
+            result.forEach(categoryData => {
+                let flag=`${categoryData.enabled}`;
+                if(flag=="true"){
+                    let markup =
+                    `<article>
+                        <a href = "#/products/${categoryData.id}">${categoryData.name}</a>
+                    </article>`;
+
+                    $(this.parent).append(markup);
+                }
+                
+
+            });
+        });
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = CategoriesComponent;
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__service_shoppingCartService__ = __webpack_require__(0);
+
+class ProductComponent{
+    constructor(parent,id){
+        this.parent=parent;
+        this.id = id;
+        this.shoppingCartService=new __WEBPACK_IMPORTED_MODULE_0__service_shoppingCartService__["a" /* default */];
+        this.render();
+    }
+    render(){
+        $(this.parent).html('');
+        this.shoppingCartService.getProductsData(this.id).then((result)=>{
+            result.forEach(productData => {
+                let markup = this.returnMarkup(productData);
+                if(this.id!=0 && this.id==productData.category){
+                    $(this.parent).append(markup);
+                }else if(this.id==0){
+                    $(this.parent).append(markup);
+                }
+            });
+        });
+    }
+    returnMarkup(productData){
+        return `<section class= "productContainer">
+        <p class="productName">${productData.name}</p>
+        <section class="productImageContainer">
+            <img class="productImage" src = "${productData.imageURL}" alt="">
+        </section>
+        <p class="productDescription">${productData.description}</p>
+        <article class="mrpandbuy">
+            <p class="mrp">MRP Rs.${productData.price}</p>
+            <button class="productBuy" type="button">Buy Now</button>
+        </article>
+        </section>
+        `;
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = ProductComponent;
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class  Utils{
+    constructor(){
+        
+    }
+    parseRequestURL(){
+
+        let url = window.location.hash.slice(1).toLowerCase() || '/';
+        let r = url.split("/")
+        let request = {
+            resource    : null,
+            id          : null,
+            verb        : null
+        }
+        request.resource    = r[1]
+        request.id          = r[2]
+        request.verb        = r[3]
+
+        return request;
+    }
+
+    // --------------------------------
+    //  Simple sleep implementation
+    // --------------------------------
+    sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Utils;
 
 
 /***/ })

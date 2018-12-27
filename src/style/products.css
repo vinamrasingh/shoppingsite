@@ -1,7 +1,8 @@
 .grid-container{
     display:grid;
+    background-color: #eeeeee;
 }
-.categories Class{
+.categoriesClass{
     grid-column-start: 1;
     grid-column-end: 2;
 }
@@ -11,11 +12,13 @@
     display: grid;
     grid-template-columns: repeat(4,1fr);
     grid-gap: 1em;
+    margin: 0.5%;
 }
 .productContainer{
     display: flex;
     flex-direction: column;
     border-bottom: black 1px dotted;
+    background-color: white;
 }
 .productName{
     flex: 20%;
@@ -47,6 +50,9 @@
     align-items: center;
     margin-left: 5%;
     margin-right: 5%;
+    background: lightgray;
+    overflow: hidden;
+    height: 20%;
 }
 .mrpandbuy{
     display: flex;

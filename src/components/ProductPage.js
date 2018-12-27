@@ -1,13 +1,15 @@
-import CategoriesComponent  from './components/CategoriesComponent';
+import CategoriesComponent  from './CategoriesComponent';
 //import HomeComponent from './components/HomeComponent';
-import ProductComponent from './components/ProductComponent';
+import ProductComponent from './ProductComponent';
 //import HomeComponent from './components/HomeComponent';
 
 export default class ProductPage{
-    constructor(parent){
+    constructor(parent,request){
         this.homeActivated= true;
         this.productActivated=false;
         this.parent ='.content';
+        this.request = request;
+        this.id= (this.request && this.request.id)?this.request.id : 0;
         //this.banner = new BannerComponent('.grid-container');
         this.render();
     }
@@ -21,7 +23,7 @@ export default class ProductPage{
         </section>`;
         $(this.parent).html(markUp);
         new  CategoriesComponent(".categoriesClass");
-        new ProductComponent(".productsClass");
+        new ProductComponent(".productsClass",this.id);
          
     }
     /* render(){
