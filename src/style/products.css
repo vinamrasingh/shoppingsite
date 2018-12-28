@@ -8,7 +8,11 @@
 }
 .categoriesName{
     padding: 10%;
-    border-bottom: gray solid;
+    
+    border-bottom: gray solid 1px;
+}
+.categoriesName a{
+    color:gray;
 }
 .productsClass{
     grid-column-start: 2;

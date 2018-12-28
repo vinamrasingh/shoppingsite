@@ -17,11 +17,4 @@ export default class  Utils{
 
         return request;
     }
-
-    // --------------------------------
-    //  Simple sleep implementation
-    // --------------------------------
-    sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
 }

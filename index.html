@@ -11,6 +11,7 @@
     <link href="./src/style/carouselStyle.css" rel="stylesheet" type="text/css" />
     <link href="./src/style/base.css" rel="stylesheet" type="text/css" />
     <link href="./src/style/products.css" rel="stylesheet" type="text/css"/>
+    <link href="./src/style/cart.css" rel="stylesheet" type="text/css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
@@ -22,8 +23,8 @@
             <article class="nav-menu">
                 <nav>
                 
-                    <a  href="/#/" id="homeLink" class="homeButton">Home</a>
-                    <a  href="/#/products/0" id="productLink" class ="productButton">Products</a>
+                    <a  href="/#/" class="homeButton">Home</a>
+                    <a  href="/#/products/0" class ="productButton">Products</a>
                 </nav>
             </article>
         </section>
@@ -35,7 +36,7 @@
             </article>
             <article class="headerCart">
                 <span class="headerCartImage">
-                    <img src="../static/images/cart.svg" />
+                    <a href = "/#/cart"><img src="../static/images/cart.svg" alt="" /></a>
                     <span>0 Items</span>
                 </span>
 
@@ -52,6 +53,7 @@
         </section> -->
 
     </main>
+    <div id="overlay"></div>
     <script src='dist/page1/build/bundle.js'></script>
 </body>
 

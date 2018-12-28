@@ -124,6 +124,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_HomeComponent__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_ProductPage__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__service_Utils__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_CartComponent__ = __webpack_require__(10);
+
 
 
 
@@ -131,23 +133,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 class MainComponent{
     constructor(){
-        this.routes = {
-            '/':__WEBPACK_IMPORTED_MODULE_0__components_HomeComponent__["a" /* default */],
-            '/products/:id':__WEBPACK_IMPORTED_MODULE_1__components_ProductPage__["a" /* default */]
-        }
+        
         this.utils= new __WEBPACK_IMPORTED_MODULE_2__service_Utils__["a" /* default */]();
         this.render();
     }
     render(){
 
-
+        let routes = {
+            '/':__WEBPACK_IMPORTED_MODULE_0__components_HomeComponent__["a" /* default */],
+            '/products/:id':__WEBPACK_IMPORTED_MODULE_1__components_ProductPage__["a" /* default */],
+            '/cart' : __WEBPACK_IMPORTED_MODULE_3__components_CartComponent__["a" /* default */]
+        }
         let router=()=>{
             const content = document.getElementsByClassName('.content');
     
             let request = this.utils.parseRequestURL();
             let parsedURL = (request.resource ? '/' + request.resource : '/') + (request.id ? '/:id' : '') + (request.verb ? '/' + request.verb : '');
-            let page = this.routes[parsedURL] ? this.routes[parsedURL] : Error404
-            content.innerHTML =  new page(".content",request);
+            let page = routes[parsedURL] ? routes[parsedURL] : Error404
+            if(parsedURL == '/cart'){
+                new page("#overlay",request);
+            }else{
+                new page(".content",request);
+            }
+            
         }
         window.addEventListener('hashchange',()=>{router();});
         window.addEventListener('load',()=>{router();});
@@ -606,15 +614,106 @@ class  Utils{
 
         return request;
     }
-
-    // --------------------------------
-    //  Simple sleep implementation
-    // --------------------------------
-    sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = Utils;
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CartItemComponent__ = __webpack_require__(11);
+
+
+class CartComponent{
+    constructor(parent){
+        this.parent=parent;
+        this.render();
+
+    }
+    render(){
+        let markUp = `
+        <div class= "cartBackground">
+        <div class="overlay-content">
+        <span class="close">&times;</span>
+        <main class="cartContainer">
+            <section class="cartHeader">
+                <h1 class="cartItemLabel">My Cart  &nbsp;</h1><h3 class="cartItemCount">(1 item)</h3>
+            </section>
+            <section class="cartItemContainer">
+
+                
+            </section>
+            <section class="discountBanner" role="banner">
+                <article class="discountLogo">
+                    <img src="static/images/lowest-price.png" alt="">
+                </article>
+                <article >
+                    You won't find it cheaper anywhere
+                </article>
+            </section>
+        </main>
+
+        <footer class="">
+            <p>Promo code can be applied on payment page</p>
+                <a href="#"><span>Proceed to checkout</span><span>Rs. 187   ></span></a>
+        </footer>
+        </div>
+        </div>`;
+        
+        $(this.parent).html(markUp);
+        $('.close').on('click',()=>{
+            $('.cartBackground')[0].style.display ="none";
+            history.back();
+        });
+        new __WEBPACK_IMPORTED_MODULE_0__CartItemComponent__["a" /* default */](".itemContainer");
+        
+
+
+
+        
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = CartComponent;
+
+
+/***/ }),
+/* 11 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class CartItemComponent{
+    constructor(parent){
+        this.parent=parent;
+        this.render();
+    }
+    render(){
+        let markUp=`
+        <section class="cart-item">
+                    <article class="item-img">
+                        <img src="images/products/fruit-n-veg/apple.jpg"/>
+                    </article>
+                    <article class="item-content">
+                        <h1>Apple - Washington,Regular,4 pcs</h1>
+                        <p>
+                            <span class="leftCalc">  
+                                <span class="cartButton">-</span>
+                                <span>1</span>
+                                <span class="cartButton">+</span>
+                                    X  <span>Rs. 187</span>
+                            </span>   
+                            <span class="rightCalc">    
+                            <span class="grand-total">Rs.187</span>
+                            </span>  
+                        </p>
+                    </article>
+                </section>    
+        `;
+        $(this.parent).append(markUp);
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = CartItemComponent;
 
 
 /***/ })
