@@ -4,7 +4,6 @@
     font-size: 28px;
     font-weight: bold;
     display: block;
-    flex: 100%;
     text-align: right;
     margin-right: 2%;
 }
@@ -33,15 +32,18 @@
     background: white;
     flex-direction: column;
     margin:2% auto;
-    width: 75%;
+    width: 35%;
+    height :90%;
 }
 .cartContainer{
     display: flex;
     flex-direction: column;
+    background: #eeeeee;
 }
 .cartHeader{
     background-color: #ffffff;
-    padding: 3% 5%;
+    padding: 0% 5%;
+    display: inherit;
 }
 .cartItemLabel{
     font-size: 1.3em;
@@ -54,8 +56,15 @@
 
 }
 .discountBanner{
-
+    background: white;
+    display: inherit;
+    margin: 2%;
 }
 .discountLogo{
-
+    padding-left: 5%;
+}
+.discountText{
+    display: flex;
+    align-items: center;
+    padding-left: 5%;
 }
