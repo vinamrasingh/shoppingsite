@@ -558,17 +558,38 @@ class ProductComponent{
         this.render();
     }
     render(){
+        //const context={context:this};
+
         $(this.parent).html('');
         this.shoppingCartService.getProductsData(this.id).then((result)=>{
             result.forEach(productData => {
+                const context={context:productData};
                 let markup = this.returnMarkup(productData);
                 if(this.id!=0 && this.id==productData.category){
                     $(this.parent).append(markup);
                 }else if(this.id==0){
                     $(this.parent).append(markup);
                 }
+                let addToCart=function(){
+                    let item = sessionStorage.getItem(productData.id);
+                    if(!item){
+                        item=productData;
+                        item.qty=1;
+                    }
+                    else{
+                        let obj = JSON.parse(item);
+                        obj.qty+=1;
+                        item=obj;
+                    }
+                    sessionStorage.setItem(productData.id,JSON.stringify(item));
+
+                    console.log('Adding : '+ productData.id +'and '+productData.category);
+                }
+                let boundFunc=addToCart.bind(context);
+                $('#add_'+`${productData.id}`).on('click',boundFunc);
             });
         });
+        
     }
     returnMarkup(productData){
         return `<section class= "productContainer">
@@ -581,7 +602,7 @@ class ProductComponent{
         </section>
         <article class="mrpandbuy">
             <p class="mrp">MRP Rs.${productData.price}</p>
-            <button class="productBuy" type="button">Buy Now</button>
+            <button class="productBuy" id="add_${productData.id}" type="button">Buy Now</button>
         </article>
         </section>
         `;
@@ -649,15 +670,15 @@ class CartComponent{
                 <article class="discountLogo">
                     <img src="static/images/lowest-price.png" alt="">
                 </article>
-                <article >
+                <article class="discountBannerText">
                     You won't find it cheaper anywhere
                 </article>
             </section>
         </main>
 
-        <footer class="">
+        <footer class="cartFooter">
             <p>Promo code can be applied on payment page</p>
-                <a href="#"><span>Proceed to checkout</span><span>Rs. 187   ></span></a>
+            <a href="#"><span>Proceed to checkout</span><span id="cartTotal"> </span></a>
         </footer>
         </div>
         </div>`;
@@ -667,7 +688,7 @@ class CartComponent{
             $('.cartBackground')[0].style.display ="none";
             history.back();
         });
-        new __WEBPACK_IMPORTED_MODULE_0__CartItemComponent__["a" /* default */](".itemContainer");
+        new __WEBPACK_IMPORTED_MODULE_0__CartItemComponent__["a" /* default */](".cartItemContainer");
         
 
 
@@ -683,34 +704,50 @@ class CartComponent{
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__service_shoppingCartService__ = __webpack_require__(0);
+
+
 class CartItemComponent{
     constructor(parent){
         this.parent=parent;
+        this.shoppingCartService=new __WEBPACK_IMPORTED_MODULE_0__service_shoppingCartService__["a" /* default */]();
         this.render();
     }
     render(){
-        let markUp=`
-        <section class="cart-item">
-                    <article class="item-img">
-                        <img src="images/products/fruit-n-veg/apple.jpg"/>
-                    </article>
-                    <article class="item-content">
-                        <h1>Apple - Washington,Regular,4 pcs</h1>
-                        <p>
-                            <span class="leftCalc">  
-                                <span class="cartButton">-</span>
-                                <span>1</span>
-                                <span class="cartButton">+</span>
-                                    X  <span>Rs. 187</span>
-                            </span>   
-                            <span class="rightCalc">    
-                            <span class="grand-total">Rs.187</span>
-                            </span>  
-                        </p>
-                    </article>
-                </section>    
-        `;
-        $(this.parent).append(markUp);
+        let cartTotal = 0;
+        this.shoppingCartService.getProductsData(0).then((result)=>{
+            result.forEach(product => {
+                let productData=JSON.parse(sessionStorage.getItem(product.id));
+                if(productData){
+                    let grandTotal =`${productData.qty * productData.price}`;
+                    cartTotal+=parseInt(grandTotal);
+                    let markUp=`
+                    <section class="cartItem">
+                                <article class="cartItemImage">
+                                    <img src="${productData.imageURL}"/>
+                                </article>
+                                <article class="cartItemText">
+                                    <h1>${productData.name}</h1>
+                                    <p>
+                                        <span class="leftCalc">  
+                                            <span class="cartButton">-</span>
+                                            <span>${productData.qty}</span>
+                                            <span class="cartButton">+</span>
+                                                X  <span>Rs. ${productData.price}</span>
+                                        </span>   
+                                        <span class="rightCalc">    
+                                        <span class="grand-total">Rs. ${grandTotal}</span>
+                                        </span>  
+                                    </p>
+                                </article>
+                            </section>    
+                    `;
+                    $(this.parent).append(markUp);
+                    $("#cartTotal").html("Rs. "+cartTotal + ">");
+                }
+            });
+        });
+        
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = CartItemComponent;

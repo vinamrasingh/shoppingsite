@@ -23,15 +23,15 @@ export default class CartComponent{
                 <article class="discountLogo">
                     <img src="static/images/lowest-price.png" alt="">
                 </article>
-                <article >
+                <article class="discountBannerText">
                     You won't find it cheaper anywhere
                 </article>
             </section>
         </main>
 
-        <footer class="">
+        <footer class="cartFooter">
             <p>Promo code can be applied on payment page</p>
-                <a href="#"><span>Proceed to checkout</span><span>Rs. 187   ></span></a>
+            <a href="#"><span>Proceed to checkout</span><span id="cartTotal"> </span></a>
         </footer>
         </div>
         </div>`;
@@ -41,7 +41,7 @@ export default class CartComponent{
             $('.cartBackground')[0].style.display ="none";
             history.back();
         });
-        new CartItemComponent(".itemContainer");
+        new CartItemComponent(".cartItemContainer");
         
 
 

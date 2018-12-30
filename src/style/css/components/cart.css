@@ -1,0 +1,135 @@
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  display: block;
+  text-align: right;
+  margin-right: 2%;
+}
+.close:hover {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.cartBackground {
+  position: fixed;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  cursor: pointer;
+}
+
+.overlay-content {
+  display: flex;
+  background: white;
+  flex-direction: column;
+  margin: 2% auto;
+  width: 100%;
+  height: 100%;
+}
+
+.cartContainer {
+  display: flex;
+  flex-direction: column;
+  background: #eeeeee;
+  height: 80%;
+}
+
+.cartHeader {
+  background-color: #ffffff;
+  padding: 0% 5%;
+  display: inherit;
+}
+
+.cartItemLabel {
+  font-size: 1.3em;
+}
+
+.cartItemCount {
+  display: inline-block;
+  background-color: inherit;
+}
+
+.cartItemContainer {
+  padding-top: 5%;
+}
+.cartItemContainer .cartItem {
+  display: flex;
+  flex-direction: row;
+  background-color: #ffffff;
+  align-items: center;
+  padding-left: 3%;
+}
+.cartItemContainer .cartItem .cartItemImage {
+  width: 25%;
+}
+.cartItemContainer .cartItem .cartItemImage img {
+  width: 100%;
+}
+.cartItemContainer .cartItem .cartItemText {
+  width: 80%;
+  background-color: inherit;
+  padding-left: 2%;
+}
+.cartItemContainer .cartItem .cartItemText p, .cartItemContainer .cartItem .cartItemText span, .cartItemContainer .cartItem .cartItemText h1 {
+  background-color: inherit;
+}
+.cartItemContainer .cartItem .cartItemText h1 {
+  font-size: 1.2em;
+}
+.cartItemContainer .cartItem .cartItemText p {
+  font-size: 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-weight: bold;
+}
+.cartItemContainer .cartItem .cartItemText p .leftCalc {
+  width: 65%;
+}
+.cartItemContainer .cartItem .cartItemText p .leftCalc .cartButton {
+  color: #ffffff;
+  background-color: #BD2A57;
+  padding: 1% 6%;
+  border-radius: 5px;
+}
+
+.discountBanner {
+  background: white;
+  display: inherit;
+  margin: 2%;
+  align-items: center;
+}
+.discountBanner .discountLogo {
+  width: 35%;
+}
+.discountBanner .discountLogo img {
+  width: 100%;
+  padding: 10%;
+}
+.discountBanner .discountBannerText {
+  padding: 3%;
+}
+
+.cartFooter {
+  text-align: center;
+}
+.cartFooter a {
+  padding: 3%;
+  background: #BD2A57;
+}
+
+/*# sourceMappingURL=cart.css.map */

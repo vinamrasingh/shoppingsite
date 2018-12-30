@@ -1,8 +1,14 @@
-* {box-sizing:border-box}
+/* img{
+  width :100%;
+} */
+/* Fading animation */
+* {
+  box-sizing: border-box;
+}
 
-.suggestions{
+.suggestions {
   flex: 40%;
-    margin-top: 15%;
+  margin-top: 15%;
 }
 
 .slideshow-container {
@@ -24,28 +30,40 @@ header.carouselHead {
   display: none;
 }
 
-.prev, .next {
-  cursor: pointer;
+.prev {
   position: absolute;
   top: 50%;
   width: auto;
   margin-top: -22px;
   padding: 16px;
-  color:black;
+  color: black;
   font-weight: bold;
   font-size: 18px;
   transition: 0.6s ease;
   border-radius: 0 3px 3px 0;
   user-select: none;
 }
+.prev:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
 
 .next {
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: black;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
   right: 0;
   border-radius: 3px 0 0 3px;
 }
-
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .text {
@@ -58,27 +76,23 @@ header.carouselHead {
   text-align: center;
 }
 
-
 .imageDiv {
   margin: 10%;
   margin-top: 5%;
 }
-/* img{
-  width :100%;
-} */
 
-.carouselPrice{
+.carouselPrice {
   text-align: center;
   font-size: 2em;
 }
 
-.viewDetailContainer{
+.viewDetailContainer {
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
-.viewDetails{
+
+.viewDetails {
   background: none;
   border: 1px solid lightgrey;
   text-align: center;
@@ -95,7 +109,6 @@ header.carouselHead {
   font-weight: bold;
 }
 
-/* Fading animation */
 .fade {
   -webkit-animation-name: fade;
   -webkit-animation-duration: 1.5s;
@@ -104,11 +117,20 @@ header.carouselHead {
 }
 
 @-webkit-keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fade {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-@keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
-}
+/*# sourceMappingURL=carouselstyle.css.map */

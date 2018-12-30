@@ -1,0 +1,114 @@
+$color_1: gray;
+$color_2: white;
+$background_color_1: #eeeeee;
+$background_color_2: white;
+$background_color_3: #BD2A57;
+$desktop : 990px;
+$tablet : 760px;
+
+@mixin tablet {
+	@media (min-width : #{$tablet}) {
+		@content;
+	}
+}
+@mixin desktop {
+	@media (min-width : #{$desktop}) {
+		@content;
+	}
+}
+
+.grid-container {
+	display: grid;
+	background-color: $background_color_1;
+}
+.categoriesClass {
+	grid-column-start: 1;
+	grid-column-end: 2;
+}
+.categoriesName {
+	padding: 10%;
+	border-bottom: gray solid 1px;
+	a {
+		color: $color_1;
+	}
+}
+.productsClass {
+	grid-column-start: 2;
+	grid-column-end: 6;
+	display: grid;
+	grid-template-columns: repeat(1,1fr);
+	grid-gap: 1em;
+	margin: 0.5%;
+
+	@include tablet(){
+		grid-template-columns: repeat(2,1fr);
+	}
+	@include desktop(){
+		grid-template-columns: repeat(4,1fr);
+	}
+	
+}
+.productContainer {
+	display: flex;
+	flex-direction: column;
+	border-bottom: black 1px dotted;
+	background-color: $background_color_2;
+}
+.productName {
+	font-size: 1.5em;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+	text-align: center;
+}
+.productImageContainer {
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+}
+.productImage {
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	align-content: center;
+	width: 100%;
+}
+.descriptionContainer {
+	flex-grow: 0;
+	flex-shrink: 0;
+	flex-basis: 5em;
+}
+.productDescription {
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+	margin-left: 5%;
+	margin-right: 5%;
+	background: lightgray;
+	overflow: hidden;
+}
+.mrpandbuy {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+}
+.mrp {
+	flex: 50%;
+	align-content: center;
+	justify-content: center;
+	text-align: center;
+	align-items: center;
+}
+.productBuy {
+	flex: 50%;
+	align-content: center;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	background-color: $background_color_3;
+	border: none;
+	padding: 5%;
+	color: $color_2;
+}

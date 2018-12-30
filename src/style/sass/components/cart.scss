@@ -1,0 +1,182 @@
+$color_1: #aaa;
+$color_2: black;
+$background_color_1: rgba(0,0,0,0.5);
+$background_color_2: #ffffff;
+$background_color_3: inherit;
+$background_color_4: #BD2A57;
+$desktop:990px;
+
+@mixin desktop {
+    @media(min-width: #{$desktop}){
+        @content;
+    }
+}
+
+.close {
+	color: $color_1;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+	display: block;
+	text-align: right;
+	margin-right: 2%;
+	&:hover {
+		color: $color_2;
+		text-decoration: none;
+		cursor: pointer;
+	}
+	&:focus {
+		color: $color_2;
+		text-decoration: none;
+		cursor: pointer;
+	}
+}
+.cartBackground {
+	position: fixed;
+	display: block;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: $background_color_1;
+	z-index: 2;
+	cursor: pointer;
+}
+.overlay-content {
+	display: flex;
+	background: white;
+	flex-direction: column;
+	margin: 2% auto;
+	width: 100%;
+    height: 100%;
+    
+    @include desktop(){
+        width: 30%;
+        height: 95%;
+        margin :1% auto;
+    }
+}
+.cartContainer {
+	display: flex;
+	flex-direction: column;
+    background: #eeeeee;
+    height: 80%;
+}
+
+.cartHeader {
+	background-color: $background_color_2;
+	padding: 0% 5%;
+    display: inherit;
+    color: black;
+    
+    @include desktop(){
+        background-color: black;
+        color: white;
+    }
+}
+.cartItemLabel {
+	font-size: 1.3em;
+}
+.cartItemCount {
+	display: inline-block;
+	background-color: $background_color_3;
+}
+
+.cartItemContainer
+{
+    padding-top: 5%;
+    overflow: scroll;
+    .cartItem
+    {
+        display:flex;
+        flex-direction: row;
+        background-color: #ffffff;
+        align-items: center;
+        padding-left: 3%;
+        .cartItemImage
+        {
+            width: 25%;
+        
+            img
+            {
+                width: 100%;
+            }
+        }
+        .cartItemText
+        {
+            width: 80%;
+            background-color: inherit;
+            padding-left: 2%;
+            p , span , h1
+            {
+                background-color: inherit;  
+            }
+            h1
+            {
+                font-size:1.1em;
+            }
+            p
+            {
+                
+                font-size: 1em;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                font-weight: bold;
+                
+                .leftCalc
+                {
+                    width:65%;
+                    .cartButton
+                    {
+                        color: #ffffff;
+                        background-color: #BD2A57;
+                        padding:1% 6%;
+                        border-radius: 5px;
+                    }
+                }
+                .rightCalc{
+                    padding-right: 5%;
+                }
+                
+            }
+        }
+    }    
+}
+
+.discountBanner {
+	background: white;
+	display: inherit;
+    margin: 2%;
+    align-items: center;
+    .discountLogo {
+        width:35%;
+        img{
+            width: 100%;
+            padding: 10%;
+        }
+    }
+    .discountBannerText{
+        padding: 3%;
+    }
+}
+
+.cartFooter{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    a{
+        padding: 3%;
+        background: $background_color_4;
+        color: white;
+        padding: 3% 10% 3% 10%;
+        border-radius: 4px;
+        display: flex;
+        justify-content: space-between;
+        width: 80%;
+    }
+}
+
