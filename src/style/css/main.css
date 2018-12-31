@@ -366,19 +366,20 @@ header.carouselHead {
   float: right;
   font-size: 28px;
   font-weight: bold;
-  display: block;
+  display: inherit;
+  align-items: center;
   text-align: right;
   margin-right: 2%;
 }
-.close:hover {
+.close:hover, .close:focus {
   color: black;
   text-decoration: none;
   cursor: pointer;
 }
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+@media (min-width: 990px) {
+  .close:hover, .close:focus {
+    color: white;
+  }
 }
 
 .cartBackground {
@@ -423,6 +424,11 @@ header.carouselHead {
   padding: 0% 5%;
   display: inherit;
   color: black;
+  justify-content: space-between;
+}
+.cartHeader .cartInfo {
+  display: inherit;
+  align-items: center;
 }
 @media (min-width: 990px) {
   .cartHeader {
@@ -479,13 +485,31 @@ header.carouselHead {
   width: 65%;
 }
 .cartItemContainer .cartItem .cartItemText p .leftCalc .cartButton {
-  color: #ffffff;
+  color: white;
   background-color: #BD2A57;
   padding: 1% 6%;
   border-radius: 5px;
 }
 .cartItemContainer .cartItem .cartItemText p .rightCalc {
   padding-right: 5%;
+}
+
+.cartEmpty {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  background: #ffffff;
+}
+.cartEmpty p:first-child {
+  font-weight: bold;
+  font-size: 1.2em;
+  line-height: 0em;
+}
+.cartEmpty p:nth-child(2) {
+  line-height: 0em;
 }
 
 .discountBanner {
@@ -510,6 +534,8 @@ header.carouselHead {
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 20%;
+  justify-content: center;
 }
 .cartFooter a {
   padding: 3%;
@@ -518,8 +544,13 @@ header.carouselHead {
   padding: 3% 10% 3% 10%;
   border-radius: 4px;
   display: flex;
-  justify-content: space-between;
   width: 80%;
+}
+.cartFooter .showTotals {
+  justify-content: space-between;
+}
+.cartFooter .startShopping {
+  justify-content: center;
 }
 
 /*# sourceMappingURL=main.css.map */

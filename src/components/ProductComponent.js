@@ -1,18 +1,21 @@
 import ShoppingCartService from '../service/shoppingCartService';
+import Utils from '../service/Utils';
+
 export default class ProductComponent{
     constructor(parent,id){
         this.parent=parent;
         this.id = id;
         this.shoppingCartService=new ShoppingCartService;
+        this.Utils = new Utils();
         this.render();
     }
     render(){
-        //const context={context:this};
+        const context={context:this};
 
         $(this.parent).html('');
         this.shoppingCartService.getProductsData(this.id).then((result)=>{
             result.forEach(productData => {
-                const context={context:productData};
+                //const context={context:productData};
                 let markup = this.returnMarkup(productData);
                 if(this.id!=0 && this.id==productData.category){
                     $(this.parent).append(markup);
@@ -20,19 +23,9 @@ export default class ProductComponent{
                     $(this.parent).append(markup);
                 }
                 let addToCart=function(){
-                    let item = sessionStorage.getItem(productData.id);
-                    if(!item){
-                        item=productData;
-                        item.qty=1;
-                    }
-                    else{
-                        let obj = JSON.parse(item);
-                        obj.qty+=1;
-                        item=obj;
-                    }
-                    sessionStorage.setItem(productData.id,JSON.stringify(item));
-
-                    console.log('Adding : '+ productData.id +'and '+productData.category);
+                    let newVal=this.context.Utils.addToCart(productData); 
+                    $(".cartItemCount").html(`(${newVal.totalQty} Items)`);
+                    $(".mainHeaderQty").html(`${newVal.totalQty} Items`)
                 }
                 let boundFunc=addToCart.bind(context);
                 $('#add_'+`${productData.id}`).on('click',boundFunc);

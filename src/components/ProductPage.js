@@ -24,25 +24,6 @@ export default class ProductPage{
         $(this.parent).html(markUp);
         new  CategoriesComponent(".categoriesClass");
         new ProductComponent(".productsClass",this.id);
-         
     }
-    /* render(){
-        const self={context: this};
-        let openHome=function(){
-            
-            new HomeComponent(".content");
-        }
-        let openProduct=function(){
-            new ProductComponent(".content");
-        }
-        // $(this.parent).append(markUp);
-        let boundFuncHome=openHome.bind(self);
-        let boundFuncProduct=openProduct.bind(self);
-          
-        $('.homeButton').on('click',boundFuncHome);
-        $('.productButton').on('click',boundFuncProduct);
-        new HomeComponent(".content");
-    } */
-    
 }
 new ProductPage();

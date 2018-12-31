@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -120,10 +120,129 @@ class ShoppingCartService{
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+class  Utils{
+    constructor(){
+        
+    }
+    parseRequestURL(){
+
+        let url = window.location.hash.slice(1).toLowerCase() || '/';
+        let r = url.split("/")
+        let request = {
+            resource    : null,
+            id          : null,
+            verb        : null
+        }
+        request.resource    = r[1]
+        request.id          = r[2]
+        request.verb        = r[3]
+
+        return request;
+    }
+    addToCart(productData){
+        let items=JSON.parse(sessionStorage.getItem("cartItems"));
+        let item={};
+        let qty=0;
+        let itemCost = 0;
+        let totalQty = 0;
+        if(!items){
+            items=[];
+        }
+        let found=false;
+        for(let i=0;i<items.length;i++){
+            if(items[i].id == productData.id){
+                items[i].qty+=1;
+                qty=items[i].qty;
+                itemCost = qty * items[i].price;
+                found =  true;
+            }
+            totalQty+=items[i].qty;
+        }
+        if(!found){
+            item=productData;
+            item.qty=1;
+            itemCost = item.price;
+            qty=1;
+            totalQty+=1;
+            items.push(item);
+        }
+        sessionStorage.setItem("cartItems",JSON.stringify(items));
+        console.log('Adding : '+ productData.id +'and '+productData.category);
+        return {'qty' : qty,
+                'itemCost' : itemCost,
+                'totalQty' : totalQty};
+    }
+    minusFromCart(productData){
+        let items=JSON.parse(sessionStorage.getItem("cartItems"));
+        let qty=0;
+        let itemCost = 0;
+        let last=false;
+        let totalQty=0;
+
+        if(!items){
+            items=[];
+        }
+       
+        for(let i=0;i<items.length;i++){
+            totalQty +=items[i].qty;
+            if(items[i].id == productData.id){
+                items[i].qty-=1;
+                totalQty -=1;
+                
+                qty=items[i].qty;
+                if(items[i].qty == 0){
+                    items.splice(i,1);
+                    if(items.length == 0){
+                        last=true;
+                    }
+                    itemCost=0;
+                }else{
+                    itemCost = qty * items[i].price;
+                }
+            }  
+        }
+        sessionStorage.setItem("cartItems",JSON.stringify(items));
+        console.log('Adding : '+ productData.id +'and '+productData.category);
+        return {'qty' : qty,
+                'itemCost' : itemCost,
+                'totalQty' : totalQty,
+                'last' : last};
+    }
+    getEmptyCartMarkup(){
+        let emptyMarkup=`
+                <section class="cartEmpty">
+                <p>No items in your cart</p>
+                <p>Your favourite items are just a click away.
+                </section>`;
+        return emptyMarkup;
+    }
+    getEmptyCartFooterMarkup(){
+        let footerMarkup = `<a class = "startShopping" href="#"><span>Start Shopping</span></a>`;
+        return footerMarkup;
+    }
+    findTotalCost(){
+        let items=JSON.parse(sessionStorage.getItem("cartItems"));
+        let totalCost = 0;
+        if(items){
+            for(let i=0;i<items.length;i++){
+                totalCost+=(items[i].qty* items[i].price);
+            } 
+        }
+        return totalCost;
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Utils;
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_HomeComponent__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_ProductPage__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__service_Utils__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_HomeComponent__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_ProductPage__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__service_Utils__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_CartComponent__ = __webpack_require__(10);
 
 
@@ -261,12 +380,12 @@ new MainComponent();
 
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BannerComponent__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__CarouselComponent__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BannerComponent__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__CarouselComponent__ = __webpack_require__(5);
 //import MainComponent  from './components/MainComponent';
 
 
@@ -298,7 +417,7 @@ class HomeComponent {
 
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -350,11 +469,11 @@ class BannerComponent{
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ImageCarouselComponent__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ImageCarouselComponent__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_shoppingCartService__ = __webpack_require__(0);
 
 
@@ -423,7 +542,7 @@ class CarouselComponent{
 ///showSlides(1);
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -450,12 +569,12 @@ class ImageCarouselComponent{
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CategoriesComponent__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ProductComponent__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CategoriesComponent__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ProductComponent__ = __webpack_require__(9);
 
 //import HomeComponent from './components/HomeComponent';
 
@@ -482,26 +601,7 @@ class ProductPage{
         $(this.parent).html(markUp);
         new  __WEBPACK_IMPORTED_MODULE_0__CategoriesComponent__["a" /* default */](".categoriesClass");
         new __WEBPACK_IMPORTED_MODULE_1__ProductComponent__["a" /* default */](".productsClass",this.id);
-         
     }
-    /* render(){
-        const self={context: this};
-        let openHome=function(){
-            
-            new HomeComponent(".content");
-        }
-        let openProduct=function(){
-            new ProductComponent(".content");
-        }
-        // $(this.parent).append(markUp);
-        let boundFuncHome=openHome.bind(self);
-        let boundFuncProduct=openProduct.bind(self);
-          
-        $('.homeButton').on('click',boundFuncHome);
-        $('.productButton').on('click',boundFuncProduct);
-        new HomeComponent(".content");
-    } */
-    
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = ProductPage;
 
@@ -509,7 +609,7 @@ new ProductPage();
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -544,26 +644,30 @@ class CategoriesComponent{
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__service_shoppingCartService__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_Utils__ = __webpack_require__(1);
+
+
 
 class ProductComponent{
     constructor(parent,id){
         this.parent=parent;
         this.id = id;
         this.shoppingCartService=new __WEBPACK_IMPORTED_MODULE_0__service_shoppingCartService__["a" /* default */];
+        this.Utils = new __WEBPACK_IMPORTED_MODULE_1__service_Utils__["a" /* default */]();
         this.render();
     }
     render(){
-        //const context={context:this};
+        const context={context:this};
 
         $(this.parent).html('');
         this.shoppingCartService.getProductsData(this.id).then((result)=>{
             result.forEach(productData => {
-                const context={context:productData};
+                //const context={context:productData};
                 let markup = this.returnMarkup(productData);
                 if(this.id!=0 && this.id==productData.category){
                     $(this.parent).append(markup);
@@ -571,19 +675,9 @@ class ProductComponent{
                     $(this.parent).append(markup);
                 }
                 let addToCart=function(){
-                    let item = sessionStorage.getItem(productData.id);
-                    if(!item){
-                        item=productData;
-                        item.qty=1;
-                    }
-                    else{
-                        let obj = JSON.parse(item);
-                        obj.qty+=1;
-                        item=obj;
-                    }
-                    sessionStorage.setItem(productData.id,JSON.stringify(item));
-
-                    console.log('Adding : '+ productData.id +'and '+productData.category);
+                    let newVal=this.context.Utils.addToCart(productData); 
+                    $(".cartItemCount").html(`(${newVal.totalQty} Items)`);
+                    $(".mainHeaderQty").html(`${newVal.totalQty} Items`)
                 }
                 let boundFunc=addToCart.bind(context);
                 $('#add_'+`${productData.id}`).on('click',boundFunc);
@@ -612,73 +706,35 @@ class ProductComponent{
 
 
 /***/ }),
-/* 9 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-class  Utils{
-    constructor(){
-        
-    }
-    parseRequestURL(){
-
-        let url = window.location.hash.slice(1).toLowerCase() || '/';
-        let r = url.split("/")
-        let request = {
-            resource    : null,
-            id          : null,
-            verb        : null
-        }
-        request.resource    = r[1]
-        request.id          = r[2]
-        request.verb        = r[3]
-
-        return request;
-    }
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = Utils;
-
-
-/***/ }),
 /* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CartItemComponent__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_Utils__ = __webpack_require__(1);
+
 
 
 class CartComponent{
     constructor(parent){
         this.parent=parent;
+        this.Utils  = new __WEBPACK_IMPORTED_MODULE_1__service_Utils__["a" /* default */]();
         this.render();
-
     }
     render(){
         let markUp = `
         <div class= "cartBackground">
         <div class="overlay-content">
-        <span class="close">&times;</span>
         <main class="cartContainer">
             <section class="cartHeader">
-                <h1 class="cartItemLabel">My Cart  &nbsp;</h1><h3 class="cartItemCount">(1 item)</h3>
-            </section>
-            <section class="cartItemContainer">
-
-                
-            </section>
-            <section class="discountBanner" role="banner">
-                <article class="discountLogo">
-                    <img src="static/images/lowest-price.png" alt="">
+                <article class="cartInfo">
+                    <h1 class="cartItemLabel">My Cart  &nbsp;</h1><h3 class="cartItemCount"></h3>
                 </article>
-                <article class="discountBannerText">
-                    You won't find it cheaper anywhere
-                </article>
+                <article class="close">&times;</article>
             </section>
+            <section class="cartItemContainer"></section>
         </main>
-
         <footer class="cartFooter">
-            <p>Promo code can be applied on payment page</p>
-            <a href="#"><span>Proceed to checkout</span><span id="cartTotal"> </span></a>
         </footer>
         </div>
         </div>`;
@@ -688,12 +744,33 @@ class CartComponent{
             $('.cartBackground')[0].style.display ="none";
             history.back();
         });
-        new __WEBPACK_IMPORTED_MODULE_0__CartItemComponent__["a" /* default */](".cartItemContainer");
         
+        if(JSON.parse(sessionStorage.getItem("cartItems")) && JSON.parse(sessionStorage.getItem("cartItems")).length > 0){
+            let bannerMarkup= 
+                `<section class="discountBanner" role="banner">
+                    <article class="discountLogo">
+                        <img src="static/images/lowest-price.png" alt="">
+                    </article>
+                    <article class="discountBannerText">
+                        You won't find it cheaper anywhere
+                    </article>
+                </section>`;
+            let footerMarkup = 
+                `<p>Promo code can be applied on payment page</p>
+                <a class="showTotals" href="#"><span>Proceed to checkout</span>
+                <span id="cartTotal"> </span></a>`;
+            
+            $(".cartContainer").append(bannerMarkup);
+            $(".cartFooter").append(footerMarkup);
+            new __WEBPACK_IMPORTED_MODULE_0__CartItemComponent__["a" /* default */](".cartItemContainer");
 
-
-
-        
+        }
+        else{
+            let emptyMarkup=this.Utils.getEmptyCartMarkup();
+            $(".cartItemContainer").replaceWith(emptyMarkup);
+            let footerMarkup = this.Utils.getEmptyCartFooterMarkup();
+            $(".cartFooter").html(footerMarkup);
+        }
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = CartComponent;
@@ -705,49 +782,90 @@ class CartComponent{
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__service_shoppingCartService__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_Utils__ = __webpack_require__(1);
+
 
 
 class CartItemComponent{
     constructor(parent){
         this.parent=parent;
         this.shoppingCartService=new __WEBPACK_IMPORTED_MODULE_0__service_shoppingCartService__["a" /* default */]();
+        this.Utils=new __WEBPACK_IMPORTED_MODULE_1__service_Utils__["a" /* default */]();
         this.render();
     }
     render(){
         let cartTotal = 0;
-        this.shoppingCartService.getProductsData(0).then((result)=>{
-            result.forEach(product => {
-                let productData=JSON.parse(sessionStorage.getItem(product.id));
-                if(productData){
-                    let grandTotal =`${productData.qty * productData.price}`;
-                    cartTotal+=parseInt(grandTotal);
-                    let markUp=`
-                    <section class="cartItem">
-                                <article class="cartItemImage">
-                                    <img src="${productData.imageURL}"/>
-                                </article>
-                                <article class="cartItemText">
-                                    <h1>${productData.name}</h1>
-                                    <p>
-                                        <span class="leftCalc">  
-                                            <span class="cartButton">-</span>
-                                            <span>${productData.qty}</span>
-                                            <span class="cartButton">+</span>
-                                                X  <span>Rs. ${productData.price}</span>
-                                        </span>   
-                                        <span class="rightCalc">    
-                                        <span class="grand-total">Rs. ${grandTotal}</span>
-                                        </span>  
-                                    </p>
-                                </article>
-                            </section>    
-                    `;
-                    $(this.parent).append(markUp);
-                    $("#cartTotal").html("Rs. "+cartTotal + ">");
+        let totalQty = 0;
+        let items=JSON.parse(sessionStorage.getItem("cartItems"));
+        if(items && items.length > 0){
+            for(let i=0; i<items.length;i++){
+                let productData = items[i];
+                let grandTotal =productData.qty * productData.price;
+                cartTotal+=parseInt(grandTotal);
+                totalQty += items[i].qty;
+
+                let markUp=
+                    `<section class="cartItem" id="cartItem_${productData.id}">
+                        <article class="cartItemImage">
+                            <img src="${productData.imageURL}"/>
+                        </article>
+                        <article class="cartItemText">
+                            <h1>${productData.name}</h1>
+                            <p>
+                                <span class="leftCalc">  
+                                    <span class="cartButton" id="cartMinus_${productData.id}">-</span>
+                                    <span id="itemQty_${productData.id}">${productData.qty}</span>
+                                    <span class="cartButton" id="cartAdd_${productData.id}">+</span>
+                                        X  <span>Rs. ${productData.price}</span>
+                                </span>   
+                                <span class="rightCalc">    
+                                <span class="grand-total" id="grandTotal_${productData.id}">Rs. ${grandTotal}</span>
+                                </span>  
+                            </p>
+                        </article>
+                    </section>`;
+                $(this.parent).append(markUp);
+                $("#cartTotal").html("Rs. "+cartTotal + ">");
+                let addToCart=function(){
+                    let newVal = this.Utils.addToCart(productData); 
+                    $("#itemQty_"+`${productData.id}`).html(newVal.qty);
+                    $("#grandTotal_"+`${productData.id}`).html('Rs. '+newVal.itemCost);
+                    let megaTotal = this.Utils.findTotalCost();
+                    $("#cartTotal").html("Rs. "+megaTotal + ">");
+                    $(".cartItemCount").html(`(${newVal.totalQty} Items)`);
+                    $(".mainHeaderQty").html(`${newVal.totalQty} Items`);
                 }
-            });
-        });
-        
+                let boundFuncAdd=addToCart.bind(this);
+                $('#cartAdd_'+`${productData.id}`).on('click',boundFuncAdd);
+
+                let minusFromCart=function(){
+                    let newVal = this.Utils.minusFromCart(productData);
+                    if(newVal.qty>0){
+                        $("#itemQty_"+`${productData.id}`).html(newVal.qty);
+                        $("#grandTotal_"+`${productData.id}`).html('Rs. '+newVal.itemCost);
+                        let megaTotal = this.Utils.findTotalCost();
+                        $("#cartTotal").html("Rs. "+megaTotal + ">");
+                    } 
+                    else{
+                        if(newVal.last){
+                            let emptyMarkup=this.Utils.getEmptyCartMarkup();
+                            $(".cartItemContainer").replaceWith(emptyMarkup);
+                            $(".discountBanner").replaceWith('');
+                            let footerMarkup = this.Utils.getEmptyCartFooterMarkup();
+                            $(".cartFooter").html(footerMarkup);
+                        }else{
+                            $("#cartItem_"+`${productData.id}`).html('');
+                        } 
+                    }
+                    $(".cartItemCount").html(`(${newVal.totalQty} Items)`);
+                    $(".mainHeaderQty").html(`${newVal.totalQty} Items`);
+                }
+                let boundFuncMinus=minusFromCart.bind(this);
+                $('#cartMinus_'+`${productData.id}`).on('click',boundFuncMinus);
+            }
+        }
+        $(".cartItemCount").html(`(${totalQty} Items)`);
+        $(".mainHeaderQty").html(`${totalQty} Items`);
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = CartItemComponent;

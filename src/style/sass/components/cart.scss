@@ -1,5 +1,6 @@
 $color_1: #aaa;
 $color_2: black;
+$color_3: white;
 $background_color_1: rgba(0,0,0,0.5);
 $background_color_2: #ffffff;
 $background_color_3: inherit;
@@ -17,18 +18,17 @@ $desktop:990px;
 	float: right;
 	font-size: 28px;
 	font-weight: bold;
-	display: block;
+    display: inherit;
+    align-items: center;
 	text-align: right;
 	margin-right: 2%;
-	&:hover {
+	&:hover,&:focus {
 		color: $color_2;
 		text-decoration: none;
-		cursor: pointer;
-	}
-	&:focus {
-		color: $color_2;
-		text-decoration: none;
-		cursor: pointer;
+        cursor: pointer;
+        @include desktop(){
+            color: $color_3;
+        }
 	}
 }
 .cartBackground {
@@ -69,11 +69,17 @@ $desktop:990px;
 	background-color: $background_color_2;
 	padding: 0% 5%;
     display: inherit;
-    color: black;
+    color: $color_2;
+    justify-content: space-between;
+
+    .cartInfo{
+        display: inherit;
+        align-items: center;
+    }
     
     @include desktop(){
-        background-color: black;
-        color: white;
+        background-color: $color_2;
+        color: $color_3;
     }
 }
 .cartItemLabel {
@@ -131,8 +137,8 @@ $desktop:990px;
                     width:65%;
                     .cartButton
                     {
-                        color: #ffffff;
-                        background-color: #BD2A57;
+                        color: $color_3;
+                        background-color: $background_color_4;
                         padding:1% 6%;
                         border-radius: 5px;
                     }
@@ -145,9 +151,25 @@ $desktop:990px;
         }
     }    
 }
-
+.cartEmpty{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    background: $background_color_2;
+    p:first-child{
+        font-weight: bold;
+        font-size: 1.2em;
+        line-height: 0em;
+    }
+    p:nth-child(2){
+        line-height: 0em;
+    }
+}
 .discountBanner {
-	background: white;
+	background: $color_3;
 	display: inherit;
     margin: 2%;
     align-items: center;
@@ -168,15 +190,22 @@ $desktop:990px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    height :20%;
+    justify-content: center;
     a{
         padding: 3%;
         background: $background_color_4;
-        color: white;
+        color: $color_3;
         padding: 3% 10% 3% 10%;
         border-radius: 4px;
         display: flex;
-        justify-content: space-between;
         width: 80%;
+    }
+    .showTotals{
+        justify-content: space-between;
+    }
+    .startShopping{
+        justify-content: center;
     }
 }
 
