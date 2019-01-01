@@ -20,11 +20,20 @@ export default class CarouselComponent{
             <a class="next" id="nextButton">NEXT &#10095;</a>
             
             
+        </div>
+        <div class ="carouselDots">
+            
         </div>`;
         $(this.parent).append(markUp);
+        let c=1
         result.forEach(carouselImage => {
 
             new ImageCarouselComponent('#carouselImage', carouselImage);
+
+            let dotMarkup=`<span class="dot" id="dot_${c}"></span>`;
+            $('.carouselDots').append(dotMarkup);
+            $('#dot_'+`${c}`).on('click',{"counter":c},self.currentSlide);
+            c++;
 
         });
         this.showSlides(1);
@@ -47,17 +56,17 @@ export default class CarouselComponent{
     showSlides(n) {
         var i;
         var slides = document.getElementsByClassName("mySlides");
-        //var dots = document.getElementsByClassName("dot");
+        var dots = document.getElementsByClassName("dot");
         if (n > slides.length) {self.slideIndex = 1} 
         if (n < 1) {self.slideIndex = slides.length}
         for (i = 0; i < slides.length; i++) {
             slides[i].style.display = "none"; 
         }
-        // for (i = 0; i < dots.length; i++) {
-        //     dots[i].className = dots[i].className.replace(" active", "");
-        // }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
         slides[self.slideIndex-1].style.display = "block"; 
-        //dots[this.slideIndex-1].className += " active";
+        dots[self.slideIndex-1].className += " active";
     }   
 }
 ///showSlides(1);

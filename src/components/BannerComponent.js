@@ -8,11 +8,19 @@ export default class BannerComponent{
         
     }
     render(){
-        let self;
+        let compare=function(a,b){
+            if (a.order < b.order)
+                return -1;
+            if (a.order > b.order)
+                return 1;
+            return 0;
+        }
         this.shoppingCartService.getBannerData().then((result)=>{
             let bannerData=result;
+            
+            result.sort(compare);
             result.forEach(bannerData => {
-                self={context: bannerData};
+
                 let flag=`${bannerData.enabled}`;
                 if(flag=="true"){
                     let markup =
@@ -29,15 +37,7 @@ export default class BannerComponent{
 
                     $(this.parent).append(markup);
                 }
-               /*  let buyItem=function(){
-                    new ItemAdd("#itemCount",this.context,"edit");
-                }
-                  $(this.parent).append(markUp);
-                  let boundFunc=openModal.bind(self);
-                  
-                  $('#edit_'+`${this.id}`).on('click',boundFunc); */
             });
-            
         });
     }
 }

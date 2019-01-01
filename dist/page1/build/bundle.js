@@ -244,6 +244,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_ProductPage__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__service_Utils__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_CartComponent__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_SigninComponent__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_SignupComponent__ = __webpack_require__(13);
+
+
 
 
 
@@ -261,7 +265,9 @@ class MainComponent{
         let routes = {
             '/':__WEBPACK_IMPORTED_MODULE_0__components_HomeComponent__["a" /* default */],
             '/products/:id':__WEBPACK_IMPORTED_MODULE_1__components_ProductPage__["a" /* default */],
-            '/cart' : __WEBPACK_IMPORTED_MODULE_3__components_CartComponent__["a" /* default */]
+            '/cart' : __WEBPACK_IMPORTED_MODULE_3__components_CartComponent__["a" /* default */],
+            '/signin' : __WEBPACK_IMPORTED_MODULE_4__components_SigninComponent__["a" /* default */],
+            '/signup' : __WEBPACK_IMPORTED_MODULE_5__components_SignupComponent__["a" /* default */]
         }
         let router=()=>{
             const content = document.getElementsByClassName('.content');
@@ -274,7 +280,6 @@ class MainComponent{
             }else{
                 new page(".content",request);
             }
-            
         }
         window.addEventListener('hashchange',()=>{router();});
         window.addEventListener('load',()=>{router();});
@@ -284,101 +289,6 @@ class MainComponent{
 
 new MainComponent();
 
-
-
-
-
-
-
-
-    /* getHome(){
-        return this.home;
-    }
-    getProduct(){
-        return this.product;
-    }
-    setHome(home){
-        this.homeActivated=home;
-    }
-    setProduct(product){
-        this.productActivated=product;
-    } */
-    /* render(){
-        
-        //homePage = new HomeComponent()
-        let routes={
-            '/': new HomeComponent(".content"),
-            '/home': new ProductComponent(".content")
-            //'/product':new ProductComponent(".productsClass")
-        }
-
-        let contentDiv = document.getElementsByClassName('.content');
-        //contentDiv.innerHTML = this.routes[window.location.pathname];
-        let linkArray =document.getElementsByTagName('a');
-        for (var i = 0; i < linkArray.length; i++) {
-            linkArray[i].addEventListener('click', (e)=>{
-                e.preventDefault();
-                let pathName =this.getPathName(e);
-                //window.location.pathname=pathName;
-                //onNavItemClick(pathName);   
-                console.log('pressed');
-            });
-          }
-        /* linkArray.forEach((aElement,index)=>{
-            aElement.addEventListener('click', ()=>{
-                this.preventDefault();
-                let pathName =this.getPathName(e);
-                window.location.pathname=pathName;
-                onNavItemClick(pathName);   
-                console.log('pressed');
-            });
-        }); */
-        /* let onNavItemClick = (pathName) => {
-            window.history.pushState(
-              {}, 
-              pathName,
-              window.location.origin + pathName
-            );
-            contentDiv.innerHTML = routes[pathName];
-        }
-        window.onpopstate = () => {
-            contentDiv.innerHTML = routes[window.location.pathname];
-        } */
-
-        /* const self={context: this};
-        let urlArray= this.url.split('/');
-        if(urlArray[urlArray.length]==''){
-            new HomeComponent(.content)
-        }
-        let openHome=function(){
-            
-            new HomeComponent(".content");
-        }
-        let openProduct=function(){
-            new ProductComponent(".content");
-        } */
-        // $(this.parent).append(markUp);
-        // let boundFuncHome=openHome.bind(self);
-        // let boundFuncProduct=openProduct.bind(self);
-          
-        // $('.homeButton').on('click',boundFuncHome);
-        // $('.productButton').on('click',boundFuncProduct);
-        //new HomeComponent(".content");
-    /*} */
-    /* getPathName(element){
-        if(element.srcElement.id =="homeLink"){
-            new HomeComponent(".content");
-            return "/home.html";
-        }
-        if(element.srcElement.id =="productLink"){
-            new ProductComponent(".content");
-            return "/product.html";
-        }
-    } */
-    
-
-
-
 /***/ }),
 /* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -386,9 +296,6 @@ new MainComponent();
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BannerComponent__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__CarouselComponent__ = __webpack_require__(5);
-//import MainComponent  from './components/MainComponent';
-
-
 
 
 
@@ -396,17 +303,10 @@ class HomeComponent {
     constructor(parent,request){
         this.parent=parent;
         this.request=request;
-        /* super();
-        if(super.getHome()){
-            this.render();
-        } */
         this.render();
     }
     render(){
-        let markUp=`<section id="carousel">
-
-        </section>`;
-        // $(this.parent)[0].innerHTML="HI";
+        let markUp=`<section id="carousel"></section>`;
         $(this.parent).html(markUp);
         this.carousel= new __WEBPACK_IMPORTED_MODULE_1__CarouselComponent__["a" /* default */]("#carousel");
         this.banner = new __WEBPACK_IMPORTED_MODULE_0__BannerComponent__["a" /* default */](this.parent);
@@ -432,11 +332,19 @@ class BannerComponent{
         
     }
     render(){
-        let self;
+        let compare=function(a,b){
+            if (a.order < b.order)
+                return -1;
+            if (a.order > b.order)
+                return 1;
+            return 0;
+        }
         this.shoppingCartService.getBannerData().then((result)=>{
             let bannerData=result;
+            
+            result.sort(compare);
             result.forEach(bannerData => {
-                self={context: bannerData};
+
                 let flag=`${bannerData.enabled}`;
                 if(flag=="true"){
                     let markup =
@@ -453,15 +361,7 @@ class BannerComponent{
 
                     $(this.parent).append(markup);
                 }
-               /*  let buyItem=function(){
-                    new ItemAdd("#itemCount",this.context,"edit");
-                }
-                  $(this.parent).append(markUp);
-                  let boundFunc=openModal.bind(self);
-                  
-                  $('#edit_'+`${this.id}`).on('click',boundFunc); */
             });
-            
         });
     }
 }
@@ -497,11 +397,20 @@ class CarouselComponent{
             <a class="next" id="nextButton">NEXT &#10095;</a>
             
             
+        </div>
+        <div class ="carouselDots">
+            
         </div>`;
         $(this.parent).append(markUp);
+        let c=1
         result.forEach(carouselImage => {
 
             new __WEBPACK_IMPORTED_MODULE_0__ImageCarouselComponent__["a" /* default */]('#carouselImage', carouselImage);
+
+            let dotMarkup=`<span class="dot" id="dot_${c}"></span>`;
+            $('.carouselDots').append(dotMarkup);
+            $('#dot_'+`${c}`).on('click',{"counter":c},self.currentSlide);
+            c++;
 
         });
         this.showSlides(1);
@@ -524,17 +433,17 @@ class CarouselComponent{
     showSlides(n) {
         var i;
         var slides = document.getElementsByClassName("mySlides");
-        //var dots = document.getElementsByClassName("dot");
+        var dots = document.getElementsByClassName("dot");
         if (n > slides.length) {self.slideIndex = 1} 
         if (n < 1) {self.slideIndex = slides.length}
         for (i = 0; i < slides.length; i++) {
             slides[i].style.display = "none"; 
         }
-        // for (i = 0; i < dots.length; i++) {
-        //     dots[i].className = dots[i].className.replace(" active", "");
-        // }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
         slides[self.slideIndex-1].style.display = "block"; 
-        //dots[this.slideIndex-1].className += " active";
+        dots[self.slideIndex-1].className += " active";
     }   
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = CarouselComponent;
@@ -562,7 +471,9 @@ class ImageCarouselComponent{
           
           
         </div>`;
+        
         $(this.parent).append(markup);
+        
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = ImageCarouselComponent;
@@ -576,24 +487,17 @@ class ImageCarouselComponent{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CategoriesComponent__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ProductComponent__ = __webpack_require__(9);
 
-//import HomeComponent from './components/HomeComponent';
 
-//import HomeComponent from './components/HomeComponent';
 
 class ProductPage{
     constructor(parent,request){
-        this.homeActivated= true;
-        this.productActivated=false;
-        this.parent ='.content';
+        this.parent =parent;
         this.request = request;
         this.id= (this.request && this.request.id)?this.request.id : 0;
-        //this.banner = new BannerComponent('.grid-container');
         this.render();
     }
     
     render(){
-        const self={context: this};
-        
         let markUp=`<section class="grid-container">
                 <aside class="categoriesClass"></aside>
                 <section class="productsClass"></section>
@@ -604,8 +508,6 @@ class ProductPage{
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = ProductPage;
-
-new ProductPage();
 
 
 /***/ }),
@@ -869,6 +771,109 @@ class CartItemComponent{
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = CartItemComponent;
+
+
+/***/ }),
+/* 12 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+class SigninComponent{
+    constructor(parent,request){
+        this.parent = parent;
+        this.request = request;
+        this.render();
+    }
+    
+    render(){
+        let markUp=`
+        <section class="screenContainer">
+        <section class="leftScreen">
+            <h1>Login</h1>
+            <p>Get access to your Orders, Wishlist and Recommendations</p>
+        </section>
+        <section class="rightScreen">
+            <form action="">
+                <article class="textField">
+                    <input type="email" class="inputField" required/>
+                    <span class="floating-label">Email</span>
+                </article>
+                <article class="textField">
+                    <input type="password" class="inputField" required/>
+                    <span class="floating-label">Password</span>
+                </article>
+                <article>
+                    <a href="">Login</a>
+                </article>
+            </form>
+        </section></section>`;
+        $(this.parent).html(markUp);
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = SigninComponent;
+
+
+/***/ }),
+/* 13 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+class SignupComponent{
+    constructor(parent,request){
+        this.parent = parent;
+        this.request = request;
+        this.render();
+    }
+    
+    render(){
+        let markUp=`
+        <section class="screenContainer">
+        <section class="leftScreen">
+                        <h1>Signup</h1>
+                        <p>We do not share your personal details with anyone.</p>
+                </section>
+                
+                <section class="rightScreen">
+                        <form action="">
+                            <article class="textField">
+                                <input type="text" class="inputField" required/>
+                                <span class="floating-label">First Name</span>
+                            </article>
+    
+                            <article class="textField">
+                                <input type="text" class="inputField" required/>
+                                <span class="floating-label">Last Name</span>
+                            </article>
+                            
+                            <article class="textField">
+                                <input type="email" class="inputField" required/>
+                                <span class="floating-label">Email</span>
+                            </article>
+    
+                            <article class="textField">
+                                <input type="password" class="inputField" required/>
+                                <span class="floating-label">Password</span>
+                            </article>
+
+                            <article class="textField">
+                                <input type="password" class="inputField" required/>
+                                <span class="floating-label">Confirm Password</span>
+                            </article>
+
+                           <article>
+                               <a href="">Signup</a>
+                           </article>
+    
+    
+                        </form>
+                </section>
+        </section>`;
+        $(this.parent).html(markUp);
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = SignupComponent;
 
 
 /***/ })

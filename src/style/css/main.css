@@ -7,42 +7,112 @@ a {
   text-decoration: none;
 }
 
-header {
+.headerClass {
+  width: 100%;
+  margin-left: 1%;
+  margin-right: 1%;
+  display: flex;
+  flex-direction: row;
+}
+@media (min-width: 990px) {
+  .headerClass {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+}
+.headerClass .logoSection {
+  flex: 70%;
+}
+.headerClass .logoSection a {
+  width: 100%;
+}
+.headerClass .logoSection a img {
+  width: 35%;
+}
+@media (min-width: 990px) {
+  .headerClass .logoSection {
+    flex: 10%;
+  }
+  .headerClass .logoSection a {
+    width: 100%;
+  }
+  .headerClass .logoSection a img {
+    width: 100%;
+  }
+}
+.headerClass .rightSection {
+  flex: 20%;
+}
+@media (min-width: 990px) {
+  .headerClass .rightSection {
+    flex: 80%;
+  }
+}
+.headerClass .rightSection .rightTopSection {
+  display: none;
+}
+@media (min-width: 990px) {
+  .headerClass .rightSection .rightTopSection {
+    display: flex;
+    justify-content: flex-end;
+    margin: 1%;
+  }
+}
+.headerClass .rightSection .rightBottomSection {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+  height: 100%;
 }
-
-.headerClass {
-  widows: 100%;
-  margin-left: 1%;
-  margin-right: 1%;
+@media (min-width: 990px) {
+  .headerClass .rightSection .rightBottomSection {
+    align-items: end;
+    height: 65%;
+  }
 }
-
-.headerLeft {
-  flex: 60%;
-  display: flex;
-  flex-direction: row;
-}
-
-.headerLogo {
-  width: 40%;
-}
-
-.headerLogoImage {
-  width: 100%;
-}
-
-.headerLogin {
+.headerClass .rightSection .rightBottomSection .navSection {
   display: none;
 }
-
-section {
-  height: auto;
+@media (min-width: 990px) {
+  .headerClass .rightSection .rightBottomSection .navSection {
+    display: flex;
+    margin-left: 5%;
+    flex: 89%;
+  }
+  .headerClass .rightSection .rightBottomSection .navSection a {
+    margin-left: 5%;
+  }
 }
-
-.grid-container {
-  display: grid;
+.headerClass .rightSection .rightBottomSection .cartSection {
+  display: flex;
+  background: lightgray;
+  flex-direction: row;
+  flex: auto;
+  height: inherit;
+}
+.headerClass .rightSection .rightBottomSection .cartSection a {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+.headerClass .rightSection .rightBottomSection .cartSection a img {
+  width: 35%;
+}
+@media (min-width: 990px) {
+  .headerClass .rightSection .rightBottomSection .cartSection {
+    flex: 15%;
+    align-items: center;
+    height: 100%;
+  }
+  .headerClass .rightSection .rightBottomSection .cartSection a {
+    height: inherit;
+    width: 100%;
+  }
+  .headerClass .rightSection .rightBottomSection .cartSection a img {
+    height: 70%;
+  }
 }
 
 .content {
@@ -50,38 +120,83 @@ section {
   margin-left: 1%;
   margin-right: 1%;
 }
-
-.nav-menu {
-  display: none;
-}
-
 @media (min-width: 990px) {
   .content {
     width: 80%;
     margin-left: 10%;
     margin-right: 10%;
-  }
-
-  .nav-menu {
-    display: block;
-  }
-
-  .headerClass {
-    width: 80%;
-    margin-left: 10%;
-    margin-right: 10%;
-  }
-
-  .headerLeft {
-    flex: 40%;
-    display: flex;
-    flex-direction: row;
-  }
-
-  .headerLogo {
-    width: auto;
+    margin-top: 1%;
   }
 }
+
+/* *{
+    font-family: Dosis;
+}
+a {
+	text-decoration: none;
+}
+header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.headerClass {
+	widows: 100%;
+	margin-left: 1%;
+	margin-right: 1%;
+}
+.headerLeft {
+	flex: 60%;
+	display: flex;
+	flex-direction: row;
+}
+.headerLogo {
+	width: 40%;
+}
+.headerLogoImage {
+	width: 100%;
+}
+.headerLogin {
+	display: none;
+}
+section {
+	height: auto;
+}
+.grid-container {
+	display: grid;
+}
+.content {
+	width: 100%;
+	margin-left: 1%;
+	margin-right: 1%;
+}
+.nav-menu {
+	display: none;
+}
+@media (min-width: 990px) {
+	.content {
+		width: 80%;
+		margin-left: 10%;
+		margin-right: 10%;
+	}
+	.nav-menu {
+		display: block;
+	}
+	.headerClass {
+		width: 80%;
+		margin-left: 10%;
+		margin-right: 10%;
+	}
+	.headerLeft {
+		flex: 40%;
+		display: flex;
+		flex-direction: row;
+	}
+	.headerLogo {
+		width: auto;
+	}
+}
+ */
 /* img{
   width :100%;
 } */
@@ -98,7 +213,7 @@ section {
 .slideshow-container {
   width: 100%;
   position: relative;
-  margin: 0 auto;
+  margin: 2% auto;
 }
 
 header.carouselHead {
@@ -112,6 +227,9 @@ header.carouselHead {
 
 .mySlides {
   display: none;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 .prev {
@@ -200,6 +318,32 @@ header.carouselHead {
   animation-duration: 1.5s;
 }
 
+.carouselDots {
+  text-align: center;
+}
+
+.dot {
+  cursor: pointer;
+  height: 8px;
+  width: 8px;
+  margin: 0 4%;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+@media (min-width: 990px) {
+  .dot {
+    height: 10px;
+    width: 10px;
+    margin: 0 2%;
+  }
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
 @-webkit-keyframes fade {
   from {
     opacity: 0.4;
@@ -219,6 +363,7 @@ header.carouselHead {
 .bannerContainer {
   display: flex;
   flex-direction: row;
+  margin: 2% auto;
 }
 
 .content .bannerContainer:nth-child(odd) .imageContainer {
@@ -551,6 +696,70 @@ header.carouselHead {
 }
 .cartFooter .startShopping {
   justify-content: center;
+}
+
+.screenContainer {
+  margin-left: 13%;
+  display: flex;
+  flex-direction: row;
+}
+.screenContainer .leftScreen {
+  margin: 3%;
+}
+.screenContainer .leftScreen h1 {
+  font-size: 240%;
+}
+.screenContainer .leftScreen h1, .screenContainer .leftScreen p {
+  padding: 3% 0;
+  display: block;
+}
+.screenContainer .rightScreen {
+  margin: 2% 0;
+}
+.screenContainer .rightScreen form article {
+  margin: 3% 0;
+}
+.screenContainer .rightScreen form article .inputField {
+  border: none;
+  border-bottom: 2px solid #cccccc;
+  padding-left: 5%;
+  background-color: inherit;
+  background-image: none;
+}
+.screenContainer .rightScreen form article .inputField :focus {
+  border: none;
+  border-bottom: 2px solid #cccccc;
+}
+.screenContainer .rightScreen form article a {
+  background-color: #BD2A57;
+  display: block;
+  color: #ffffff;
+  text-align: center;
+  padding: 3%;
+  text-decoration: none;
+}
+.screenContainer .rightScreen input:focus ~ .floating-label,
+.screenContainer .rightScreen input:not(:focus):valid ~ .floating-label {
+  top: 8px;
+  bottom: 10px;
+  left: 20px;
+  font-size: 11px;
+  opacity: 1;
+}
+.screenContainer .rightScreen .inputField {
+  font-size: 14px;
+  width: 400px;
+  height: 65px;
+}
+.screenContainer .rightScreen .textField {
+  position: relative;
+}
+.screenContainer .rightScreen .floating-label {
+  position: absolute;
+  pointer-events: none;
+  left: 20px;
+  top: 18px;
+  transition: 0.2s ease all;
 }
 
 /*# sourceMappingURL=main.css.map */

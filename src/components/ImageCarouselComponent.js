@@ -14,6 +14,8 @@ export default class ImageCarouselComponent{
           
           
         </div>`;
+        
         $(this.parent).append(markup);
+        
     }
 }

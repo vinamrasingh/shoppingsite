@@ -1,6 +1,7 @@
 .bannerContainer {
   display: flex;
   flex-direction: row;
+  margin: 2% auto;
 }
 
 .content .bannerContainer:nth-child(odd) .imageContainer {

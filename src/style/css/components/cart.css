@@ -3,19 +3,20 @@
   float: right;
   font-size: 28px;
   font-weight: bold;
-  display: block;
+  display: inherit;
+  align-items: center;
   text-align: right;
   margin-right: 2%;
 }
-.close:hover {
+.close:hover, .close:focus {
   color: black;
   text-decoration: none;
   cursor: pointer;
 }
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+@media (min-width: 990px) {
+  .close:hover, .close:focus {
+    color: white;
+  }
 }
 
 .cartBackground {
@@ -40,6 +41,13 @@
   width: 100%;
   height: 100%;
 }
+@media (min-width: 990px) {
+  .overlay-content {
+    width: 30%;
+    height: 95%;
+    margin: 1% auto;
+  }
+}
 
 .cartContainer {
   display: flex;
@@ -52,6 +60,18 @@
   background-color: #ffffff;
   padding: 0% 5%;
   display: inherit;
+  color: black;
+  justify-content: space-between;
+}
+.cartHeader .cartInfo {
+  display: inherit;
+  align-items: center;
+}
+@media (min-width: 990px) {
+  .cartHeader {
+    background-color: black;
+    color: white;
+  }
 }
 
 .cartItemLabel {
@@ -65,6 +85,7 @@
 
 .cartItemContainer {
   padding-top: 5%;
+  overflow: scroll;
 }
 .cartItemContainer .cartItem {
   display: flex;
@@ -88,7 +109,7 @@
   background-color: inherit;
 }
 .cartItemContainer .cartItem .cartItemText h1 {
-  font-size: 1.2em;
+  font-size: 1.1em;
 }
 .cartItemContainer .cartItem .cartItemText p {
   font-size: 1em;
@@ -101,10 +122,31 @@
   width: 65%;
 }
 .cartItemContainer .cartItem .cartItemText p .leftCalc .cartButton {
-  color: #ffffff;
+  color: white;
   background-color: #BD2A57;
   padding: 1% 6%;
   border-radius: 5px;
+}
+.cartItemContainer .cartItem .cartItemText p .rightCalc {
+  padding-right: 5%;
+}
+
+.cartEmpty {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  background: #ffffff;
+}
+.cartEmpty p:first-child {
+  font-weight: bold;
+  font-size: 1.2em;
+  line-height: 0em;
+}
+.cartEmpty p:nth-child(2) {
+  line-height: 0em;
 }
 
 .discountBanner {
@@ -126,10 +168,26 @@
 
 .cartFooter {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 20%;
+  justify-content: center;
 }
 .cartFooter a {
   padding: 3%;
   background: #BD2A57;
+  color: white;
+  padding: 3% 10% 3% 10%;
+  border-radius: 4px;
+  display: flex;
+  width: 80%;
+}
+.cartFooter .showTotals {
+  justify-content: space-between;
+}
+.cartFooter .startShopping {
+  justify-content: center;
 }
 
 /*# sourceMappingURL=cart.css.map */

@@ -14,7 +14,7 @@
 .slideshow-container {
   width: 100%;
   position: relative;
-  margin: 0 auto;
+  margin: 2% auto;
 }
 
 header.carouselHead {
@@ -28,6 +28,9 @@ header.carouselHead {
 
 .mySlides {
   display: none;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 .prev {
@@ -116,6 +119,32 @@ header.carouselHead {
   animation-duration: 1.5s;
 }
 
+.carouselDots {
+  text-align: center;
+}
+
+.dot {
+  cursor: pointer;
+  height: 8px;
+  width: 8px;
+  margin: 0 4%;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+@media (min-width: 990px) {
+  .dot {
+    height: 10px;
+    width: 10px;
+    margin: 0 2%;
+  }
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
 @-webkit-keyframes fade {
   from {
     opacity: 0.4;
@@ -133,4 +162,4 @@ header.carouselHead {
   }
 }
 
-/*# sourceMappingURL=carouselstyle.css.map */
+/*# sourceMappingURL=carouselStyle.css.map */
