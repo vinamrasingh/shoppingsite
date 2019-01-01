@@ -1,9 +1,9 @@
 export default class ShoppingCartService{
     constructor(){
-        this.bannerURL="http://localhost:5001/categories";
-        this.carouselUrl ="http://localhost:5001/banners";
-        this.categoryUrl ="http://localhost:5001/categories";
-        this.productUrl ="http://localhost:5001/products";
+        this.bannerURL="http://localhost:5000/categories";
+        this.carouselUrl ="http://localhost:5000/banners";
+        this.categoryUrl ="http://localhost:5000/categories";
+        this.productUrl ="http://localhost:5000/products";
     }
     async getBannerData(){
         try{

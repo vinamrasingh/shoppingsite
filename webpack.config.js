@@ -10,29 +10,33 @@ const path = require('path');
 }; */
 module.exports = {
   entry: {
-    'page1': './src/index.js'/* ,
-    'page2': './src/home.js',
-    'page3': './src/products.js' */
+    'page1': './src/index.js'
   },
   output: {
     path: path.resolve(__dirname,'dist'),
     filename: "[name]/build/bundle.js"
+  },
+
+  devtool: "source-map",
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /(node_modules)/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env"]
+          }
+        }
+      }
+    ]
   },
   plugins: [
     new HtmlWebpackPlugin({
       inject: true,
       
       filename: './index.html'
-    })/* ,
-    new HtmlWebpackPlugin({
-      inject: true,
-    
-      filename: './home.html'
-    }),
-    new HtmlWebpackPlugin({
-      inject: true,
-    
-      filename: './products.html'
-    }) */
+    })
   ]
 };

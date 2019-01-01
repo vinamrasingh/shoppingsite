@@ -18,8 +18,6 @@ export default class CategoriesComponent{
 
                     $(this.parent).append(markup);
                 }
-                
-
             });
         });
     }

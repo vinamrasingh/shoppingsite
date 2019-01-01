@@ -17,7 +17,6 @@ export default class BannerComponent{
         }
         this.shoppingCartService.getBannerData().then((result)=>{
             let bannerData=result;
-            
             result.sort(compare);
             result.forEach(bannerData => {
 
