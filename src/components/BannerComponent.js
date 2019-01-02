@@ -33,6 +33,7 @@ export default class BannerComponent{
                         </article>
                                            
                     </section>
+                    <div class= "categoryBorder">&nbsp;</div>
                     
                     `;
 

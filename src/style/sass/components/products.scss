@@ -39,13 +39,16 @@ $tablet : 760px;
 		display: grid;
 		grid-template-rows: 1fr;
 		grid-auto-rows: max-content;
-		.categoriesName {
-			
-			border-bottom: gray solid 1px;
-			a {
-				color: $color_1;
+		.categoriesList{
+			.categoriesName {
+				padding: 10%;
+				border-bottom: gray solid 1px;
+				a {
+					color: $color_1;
+				}
 			}
 		}
+		
 		
 	}
 }

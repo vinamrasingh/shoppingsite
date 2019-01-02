@@ -26,8 +26,10 @@ export default class MainComponent{
             let parsedURL = (request.resource ? '/' + request.resource : '/') + (request.id ? '/:id' : '') + (request.verb ? '/' + request.verb : '');
             let page = routes[parsedURL] ? routes[parsedURL] : Error404
             if(parsedURL == '/cart'){
+                $('#overlay')[0].style.display="block";
                 new page("#overlay",request);
             }else{
+                $('#overlay')[0].style.display="none";
                 new page(".content",request);
             }
         }

@@ -274,8 +274,10 @@ class MainComponent{
             let parsedURL = (request.resource ? '/' + request.resource : '/') + (request.id ? '/:id' : '') + (request.verb ? '/' + request.verb : '');
             let page = routes[parsedURL] ? routes[parsedURL] : Error404
             if(parsedURL == '/cart'){
+                $('#overlay')[0].style.display="block";
                 new page("#overlay",request);
             }else{
+                $('#overlay')[0].style.display="none";
                 new page(".content",request);
             }
         }
@@ -355,6 +357,7 @@ class BannerComponent{
                         </article>
                                            
                     </section>
+                    <div class= "categoryBorder">&nbsp;</div>
                     
                     `;
 
@@ -498,11 +501,12 @@ class ProductPage{
     
     render(){
         let markUp=`<section class="grid-container">
-                
-                <aside class="categoriesClass">
-                    <ul class="categoriesList">
-                    </ul>
+        <aside class="categoriesClass">
+                    <section class="categoriesList">
+                    </section>
                 </aside>
+
+
                 <section class="productsClass"></section>
         </section>`;
         $(this.parent).html(markUp);

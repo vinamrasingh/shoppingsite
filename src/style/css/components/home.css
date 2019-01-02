@@ -4,7 +4,7 @@
   margin: 2% auto;
 }
 
-.bannerContainer:nth-child(odd) .imageContainer {
+.bannerContainer:nth-child(4n) .imageContainer {
   order: 2;
 }
 

@@ -8,7 +8,7 @@ $background_color_1: #BD2A57;
 }
 
 .bannerContainer {
-	&:nth-child(odd) {
+	&:nth-child(4n) {
 		.imageContainer {
 			order: 2;
 		}

@@ -11,11 +11,12 @@ export default class ProductPage{
     
     render(){
         let markUp=`<section class="grid-container">
-                
-                <aside class="categoriesClass">
-                    <ul class="categoriesList">
-                    </ul>
+        <aside class="categoriesClass">
+                    <section class="categoriesList">
+                    </section>
                 </aside>
+
+
                 <section class="productsClass"></section>
         </section>`;
         $(this.parent).html(markUp);

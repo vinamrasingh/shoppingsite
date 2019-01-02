@@ -26,10 +26,11 @@
     grid-template-rows: 1fr;
     grid-auto-rows: max-content;
   }
-  .categoriesClass .categoriesName {
+  .categoriesClass .categoriesList .categoriesName {
+    padding: 10%;
     border-bottom: gray solid 1px;
   }
-  .categoriesClass .categoriesName a {
+  .categoriesClass .categoriesList .categoriesName a {
     color: gray;
   }
 }
