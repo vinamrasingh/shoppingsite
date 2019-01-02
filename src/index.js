@@ -22,8 +22,6 @@ export default class MainComponent{
             '/signup' : SignupComponent
         }
         let router=()=>{
-            const content = document.getElementsByClassName('.content');
-    
             let request = this.utils.parseRequestURL();
             let parsedURL = (request.resource ? '/' + request.resource : '/') + (request.id ? '/:id' : '') + (request.verb ? '/' + request.verb : '');
             let page = routes[parsedURL] ? routes[parsedURL] : Error404

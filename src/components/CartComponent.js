@@ -12,7 +12,7 @@ export default class CartComponent{
         <div class= "cartBackground">
         <div class="overlay-content">
         <main class="cartContainer">
-            <section class="cartHeader">
+        <section class="cartHeader">
                 <article class="cartInfo">
                     <h1 class="cartItemLabel">My Cart  &nbsp;</h1><h3 class="cartItemCount"></h3>
                 </article>

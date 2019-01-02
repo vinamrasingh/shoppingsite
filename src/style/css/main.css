@@ -129,6 +129,20 @@ a {
   }
 }
 
+.footer {
+  background-color: #cccccc;
+  font-size: small;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  text-align: center;
+}
+@media (min-width: 990px) {
+  .footer {
+    text-align: left;
+    padding-left: 10%;
+  }
+}
+
 /* *{
     font-family: Dosis;
 }
@@ -366,7 +380,7 @@ header.carouselHead {
   margin: 2% auto;
 }
 
-.content .bannerContainer:nth-child(odd) .imageContainer {
+.content .bannerContainer :nth-child(odd) .imageContainer {
   order: 2;
 }
 
@@ -396,29 +410,51 @@ header.carouselHead {
   border: none;
 }
 
+.categoryBorder {
+  background: radial-gradient(at 50% 0, #8a8888, transparent 50%);
+  background-size: 100% 8px;
+  background-repeat: no-repeat;
+}
+
 .grid-container {
   display: grid;
+  grid-template-columns: 1fr;
   background-color: #eeeeee;
+}
+@media (min-width: 760px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+}
+@media (min-width: 990px) {
+  .grid-container {
+    grid-template-columns: 1fr 4fr;
+  }
 }
 
 .categoriesClass {
-  grid-column-start: 1;
-  grid-column-end: 2;
+  grid-template-columns: 1fr;
+  padding-top: 10%;
+  padding-bottom: 10%;
+  display: none;
 }
-
-.categoriesName {
-  padding: 10%;
-  border-bottom: gray solid 1px;
-}
-.categoriesName a {
-  color: gray;
+@media (min-width: 990px) {
+  .categoriesClass {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-auto-rows: max-content;
+  }
+  .categoriesClass .categoriesName {
+    border-bottom: gray solid 1px;
+  }
+  .categoriesClass .categoriesName a {
+    color: gray;
+  }
 }
 
 .productsClass {
-  grid-column-start: 2;
-  grid-column-end: 6;
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: 1fr;
   grid-gap: 1em;
   margin: 0.5%;
 }
@@ -446,55 +482,82 @@ header.carouselHead {
   align-content: center;
   align-items: center;
   text-align: center;
+  height: 62px;
+  overflow: hidden;
 }
 
-.productImageContainer {
+.divAlignment {
+  display: flex;
+  flex-direction: row;
+}
+@media (min-width: 990px) {
+  .divAlignment {
+    flex-direction: column;
+  }
+}
+.divAlignment .productImageContainer {
   justify-content: center;
   align-content: center;
   align-items: center;
+  width: 50%;
 }
-
-.productImage {
+@media (min-width: 990px) {
+  .divAlignment .productImageContainer {
+    width: 100%;
+  }
+}
+.divAlignment .productImageContainer .productImage {
   flex-direction: column;
   align-items: center;
   justify-content: center;
   align-content: center;
   width: 100%;
 }
-
-.descriptionContainer {
+.divAlignment .descriptionAlignment {
+  width: 50%;
+}
+@media (min-width: 990px) {
+  .divAlignment .descriptionAlignment {
+    width: 100%;
+  }
+}
+.divAlignment .descriptionAlignment .descriptionContainer {
   flex-grow: 0;
   flex-shrink: 0;
   flex-basis: 5em;
 }
-
-.productDescription {
+.divAlignment .descriptionAlignment .descriptionContainer .productDescription {
   justify-content: center;
   align-content: center;
   align-items: center;
   margin-left: 5%;
   margin-right: 5%;
-  background: lightgray;
+  background: #eeeeee;
+  height: 88px;
+  padding: 2%;
   overflow: hidden;
 }
-
-.mrpandbuy {
-  display: flex;
+.divAlignment .descriptionAlignment .mrpandbuy {
   flex-direction: row;
   justify-content: center;
   align-content: center;
   align-items: center;
+  display: flex;
 }
-
-.mrp {
+.divAlignment .descriptionAlignment .mrpandbuy .mrp {
   flex: 50%;
   align-content: center;
   justify-content: center;
   text-align: center;
   align-items: center;
+  display: none;
 }
-
-.productBuy {
+@media (min-width: 990px) {
+  .divAlignment .descriptionAlignment .mrpandbuy .mrp {
+    display: block;
+  }
+}
+.divAlignment .productBuy {
   flex: 50%;
   align-content: center;
   justify-content: center;
@@ -504,6 +567,14 @@ header.carouselHead {
   border: none;
   padding: 5%;
   color: white;
+}
+.divAlignment .productBuy .priceTag {
+  display: inline-block;
+}
+@media (min-width: 990px) {
+  .divAlignment .productBuy .priceTag {
+    display: none;
+  }
 }
 
 .close {
@@ -537,23 +608,29 @@ header.carouselHead {
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 2;
+  z-index: 1;
   cursor: pointer;
+}
+@media (min-width: 990px) {
+  .cartBackground {
+    display: block;
+  }
 }
 
 .overlay-content {
   display: flex;
   background: white;
   flex-direction: column;
-  margin: 2% auto;
+  margin: 0 auto;
   width: 100%;
   height: 100%;
+  z-index: 2;
 }
 @media (min-width: 990px) {
   .overlay-content {
     width: 30%;
     height: 95%;
-    margin: 1% auto;
+    margin: 2% auto;
   }
 }
 

@@ -129,6 +129,20 @@ a {
 	}
 }
 
+.footer
+{
+	background-color: #cccccc;
+    font-size: small;
+	padding-top: 1%;
+	padding-bottom: 1%;
+	text-align: center;
+	@include desktop(){
+		text-align: left;
+		padding-left: 10%;
+	}
+    
+}
+
 
 
 /* *{

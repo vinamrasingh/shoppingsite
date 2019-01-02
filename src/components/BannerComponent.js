@@ -16,7 +16,6 @@ export default class BannerComponent{
             return 0;
         }
         this.shoppingCartService.getBannerData().then((result)=>{
-            let bannerData=result;
             result.sort(compare);
             result.forEach(bannerData => {
 
@@ -31,8 +30,11 @@ export default class BannerComponent{
                             <h3>${bannerData.name}</h3>
                             <p>${bannerData.description}</p>
                             <a class="bannerButton" href="#/products/${bannerData.id}">Explore ${bannerData.key}</a>
-                        </article>                    
-                    </section>`;
+                        </article>
+                                           
+                    </section>
+                    
+                    `;
 
                     $(this.parent).append(markup);
                 }

@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "canned -p 5000 ./server",
     "build": "webpack --watch",
-    "watch-css": "sass --watch ./src/style/sass:./src/style/css"
+    "watch-css": "sass --watch ./src/style/sass:./src/style/css",
+    "dev":"start npm run start && start npm run build && start npm run watch-css"
   },
   "author": "",
   "license": "ISC",
@@ -18,11 +19,7 @@
     "webpack-dev-server": "^2.11.1",
     "css-loader": "^2.0.1",
     "sass-loader": "^7.1.0",
-    "style-loader": "^0.23.1",
-    "@babel/core": "^7.2.2",
-    "@babel/plugin-transform-runtime": "^7.2.0",
-    "@babel/preset-env": "^7.2.3",
-    "@babel/runtime": "^7.2.0",
-    "babel-loader": "^8.0.4"
+    "style-loader": "^0.23.1"
+    
   }
 }

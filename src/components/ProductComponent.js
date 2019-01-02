@@ -30,22 +30,26 @@ export default class ProductComponent{
                 let boundFunc=addToCart.bind(context);
                 $('#add_'+`${productData.id}`).on('click',boundFunc);
             });
-        });
-        
+        }); 
     }
     returnMarkup(productData){
         return `<section class= "productContainer">
         <p class="productName">${productData.name}</p>
+        <section class='divAlignment'>
         <section class="productImageContainer">
             <img class="productImage" src = "${productData.imageURL}" alt="">
         </section>
+        <section class ="descriptionAlignment">
         <section class="descriptionContainer">
         <p class="productDescription">${productData.description}</p>
         </section>
         <article class="mrpandbuy">
             <p class="mrp">MRP Rs.${productData.price}</p>
-            <button class="productBuy" id="add_${productData.id}" type="button">Buy Now</button>
+            <button class="productBuy" id="add_${productData.id}" type="button">Buy Now <span class="priceTag">@Rs.${productData.price}</span></button>
         </article>
+        
+        </section>
+        </section>
         </section>
         `;
     }

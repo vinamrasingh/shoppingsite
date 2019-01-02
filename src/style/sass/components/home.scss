@@ -6,12 +6,11 @@ $background_color_1: #BD2A57;
 	flex-direction: row;
 	margin: 2% auto;
 }
-.content {
-	.bannerContainer {
-		&:nth-child(odd) {
-			.imageContainer {
-				order: 2;
-			}
+
+.bannerContainer {
+	&:nth-child(odd) {
+		.imageContainer {
+			order: 2;
 		}
 	}
 }
@@ -36,4 +35,9 @@ $background_color_1: #BD2A57;
 	color: $color_1;
 	padding: 3%;
 	border: none;
+}
+.categoryBorder{
+	background: radial-gradient(at 50% 0,rgb(138,136,136),transparent 50%);
+	background-size:100% 8px;
+	background-repeat:no-repeat;
 }

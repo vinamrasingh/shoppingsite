@@ -7,7 +7,15 @@ export default class CategoriesComponent{
         this.render();
     }
     render(){
+        let compare=function(a,b){
+            if (a.order < b.order)
+                return -1;
+            if (a.order > b.order)
+                return 1;
+            return 0;
+        }
         this.shoppingCartService.getCategoriesData().then((result)=>{
+            
             result.forEach(categoryData => {
                 let flag=`${categoryData.enabled}`;
                 if(flag=="true"){

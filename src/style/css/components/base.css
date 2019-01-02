@@ -128,6 +128,20 @@ a {
   }
 }
 
+.footer {
+  background-color: #cccccc;
+  font-size: small;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  text-align: center;
+}
+@media (min-width: 990px) {
+  .footer {
+    text-align: left;
+    padding-left: 10%;
+  }
+}
+
 /* *{
     font-family: Dosis;
 }

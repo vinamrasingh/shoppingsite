@@ -4,7 +4,7 @@
   margin: 2% auto;
 }
 
-.content .bannerContainer:nth-child(odd) .imageContainer {
+.bannerContainer:nth-child(odd) .imageContainer {
   order: 2;
 }
 
@@ -32,6 +32,12 @@
   color: white;
   padding: 3%;
   border: none;
+}
+
+.categoryBorder {
+  background: radial-gradient(at 50% 0, #8a8888, transparent 50%);
+  background-size: 100% 8px;
+  background-repeat: no-repeat;
 }
 
 /*# sourceMappingURL=home.css.map */
