@@ -307,6 +307,7 @@ class HomeComponent {
     }
     render(){
         let markUp=`<section id="carousel"></section>`;
+        
         $(this.parent).html(markUp);
         this.carousel= new __WEBPACK_IMPORTED_MODULE_1__CarouselComponent__["a" /* default */]("#carousel");
         this.banner = new __WEBPACK_IMPORTED_MODULE_0__BannerComponent__["a" /* default */](this.parent);
@@ -346,7 +347,8 @@ class BannerComponent{
                 let flag=`${bannerData.enabled}`;
                 if(flag=="true"){
                     let markup =
-                    `<section role="banner" class="bannerContainer effect">
+                    `<div class= "categoryBorder">&nbsp;</div>
+                    <section role="banner" class="bannerContainer effect">
                         <article class= "imageContainer" >
                             <img class = "bannerImage" src="${bannerData.imageUrl}" alt="">
                         </article>
@@ -357,10 +359,7 @@ class BannerComponent{
                         </article>
                                            
                     </section>
-                    <div class= "categoryBorder">&nbsp;</div>
-                    
                     `;
-
                     $(this.parent).append(markup);
                 }
             });
@@ -507,12 +506,27 @@ class ProductPage{
                 </aside>
 
 
-                <section class="productsClass"></section>
+                <section class="productSide">
+                    <section id = "productList"class="productMenu">
+                        <select class="productChoices">
+                            
+                        </select>
+                    </section>
+                    <section class="productsClass"></section>
+                    
+                </section>
         </section>`;
         $(this.parent).html(markUp);
         new  __WEBPACK_IMPORTED_MODULE_0__CategoriesComponent__["a" /* default */](".categoriesList");
         new __WEBPACK_IMPORTED_MODULE_1__ProductComponent__["a" /* default */](".productsClass",this.id);
+        $('#productList').on('change',this.changeURL);
+        
 
+    }
+    changeURL(){
+        let hashValue=$('#productList :selected').val();
+        sessionStorage.selectedText=$('#productList :selected').text();
+        window.location.href=hashValue;
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = ProductPage;
@@ -540,7 +554,10 @@ class CategoriesComponent{
                 return 1;
             return 0;
         }
+        $(".productChoices").html(`<option value=""></option>`);
+        $('#productList :selected').text(sessionStorage.selectedText);
         this.shoppingCartService.getCategoriesData().then((result)=>{
+            result.sort(compare);
             
             result.forEach(categoryData => {
                 let flag=`${categoryData.enabled}`;
@@ -550,7 +567,9 @@ class CategoriesComponent{
                         <a href = "#/products/${categoryData.id}">${categoryData.name}</a>
                     </article>`;
 
+                    let optionMarkup =`<option class="categoryOptions" value ="#/products/${categoryData.id}">${categoryData.name}</option>`
                     $(this.parent).append(markup);
+                    $(".productChoices").append(optionMarkup);
                 }
             });
         });
@@ -580,7 +599,7 @@ class ProductComponent{
     render(){
         const context={context:this};
 
-        $(this.parent).html('');
+        //$(this.parent).html('');
         this.shoppingCartService.getProductsData(this.id).then((result)=>{
             result.forEach(productData => {
                 //const context={context:productData};

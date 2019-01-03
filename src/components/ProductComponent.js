@@ -12,7 +12,7 @@ export default class ProductComponent{
     render(){
         const context={context:this};
 
-        $(this.parent).html('');
+        //$(this.parent).html('');
         this.shoppingCartService.getProductsData(this.id).then((result)=>{
             result.forEach(productData => {
                 //const context={context:productData};

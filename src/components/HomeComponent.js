@@ -9,6 +9,7 @@ export default class HomeComponent {
     }
     render(){
         let markUp=`<section id="carousel"></section>`;
+        
         $(this.parent).html(markUp);
         this.carousel= new CarouselComponent("#carousel");
         this.banner = new BannerComponent(this.parent);

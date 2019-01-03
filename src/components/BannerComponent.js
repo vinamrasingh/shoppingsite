@@ -22,7 +22,8 @@ export default class BannerComponent{
                 let flag=`${bannerData.enabled}`;
                 if(flag=="true"){
                     let markup =
-                    `<section role="banner" class="bannerContainer effect">
+                    `<div class= "categoryBorder">&nbsp;</div>
+                    <section role="banner" class="bannerContainer effect">
                         <article class= "imageContainer" >
                             <img class = "bannerImage" src="${bannerData.imageUrl}" alt="">
                         </article>
@@ -33,10 +34,7 @@ export default class BannerComponent{
                         </article>
                                            
                     </section>
-                    <div class= "categoryBorder">&nbsp;</div>
-                    
                     `;
-
                     $(this.parent).append(markup);
                 }
             });
