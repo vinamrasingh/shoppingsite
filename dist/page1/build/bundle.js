@@ -210,14 +210,14 @@ class  Utils{
     }
     getEmptyCartMarkup(){
         let emptyMarkup=`
-                <section class="cartEmpty">
+                <section class="cart-empty">
                 <p>No items in your cart</p>
                 <p>Your favourite items are just a click away.
                 </section>`;
         return emptyMarkup;
     }
     getEmptyCartFooterMarkup(){
-        let footerMarkup = `<a class = "startShopping" href="#"><span>Start Shopping</span></a>`;
+        let footerMarkup = `<a class = "cart-start-shopping" href="#"><span>Start Shopping</span></a>`;
         return footerMarkup;
     }
     findTotalCost(){
@@ -347,15 +347,15 @@ class BannerComponent{
                 let flag=`${bannerData.enabled}`;
                 if(flag=="true"){
                     let markup =
-                    `<div class= "categoryBorder">&nbsp;</div>
-                    <section role="banner" class="bannerContainer effect">
-                        <article class= "imageContainer" >
-                            <img class = "bannerImage" src="${bannerData.imageUrl}" alt="">
+                    `<div class= "banner-shadow">&nbsp;</div>
+                    <section role="banner" class="banner-container effect">
+                        <article class= "banner-image-container" >
+                            <img class = "banner-image" src="${bannerData.imageUrl}" alt="">
                         </article>
-                        <article class="bannerContentContainer">
+                        <article class="banner-content-container">
                             <h3>${bannerData.name}</h3>
                             <p>${bannerData.description}</p>
-                            <a class="bannerButton" href="#/products/${bannerData.id}">Explore ${bannerData.key}</a>
+                            <a class="banner-button" href="#/products/${bannerData.id}">Explore ${bannerData.key}</a>
                         </article>
                                            
                     </section>
@@ -399,17 +399,17 @@ class CarouselComponent{
             
             
         </div>
-        <div class ="carouselDots">
+        <div class ="carousel-dots">
             
         </div>`;
         $(this.parent).append(markUp);
-        let c=1
+        let c=1;
         result.forEach(carouselImage => {
 
             new __WEBPACK_IMPORTED_MODULE_0__ImageCarouselComponent__["a" /* default */]('#carouselImage', carouselImage);
 
             let dotMarkup=`<span class="dot" id="dot_${c}"></span>`;
-            $('.carouselDots').append(dotMarkup);
+            $('.carousel-dots').append(dotMarkup);
             $('#dot_'+`${c}`).on('click',{"counter":c},self.currentSlide);
             c++;
 
@@ -433,7 +433,7 @@ class CarouselComponent{
 
     showSlides(n) {
         var i;
-        var slides = document.getElementsByClassName("mySlides");
+        var slides = document.getElementsByClassName("carousel-slides");
         var dots = document.getElementsByClassName("dot");
         if (n > slides.length) {self.slideIndex = 1} 
         if (n < 1) {self.slideIndex = slides.length}
@@ -459,16 +459,17 @@ class CarouselComponent{
 class ImageCarouselComponent{
     constructor(parent,carouselSuggestion){
         this.imgUrl=carouselSuggestion.bannerImageUrl;
+        this.altText =carouselSuggestion.bannerImageAlt;
         
         this.parent=parent;
         this.render();
     }
     render(){
         let markup=`
-        <div class="mySlides fade">
+        <div class="carousel-slides fade">
           
           
-            <img src=${this.imgUrl} style="width:100%">
+            <img src=${this.imgUrl} alt="${this.altText} "style="width:100%">
           
           
         </div>`;
@@ -500,25 +501,25 @@ class ProductPage{
     
     render(){
         let markUp=`<section class="grid-container">
-        <aside class="categoriesClass">
-                    <section class="categoriesList">
+        <aside class="product-categories-class">
+                    <section class="product-categories-list">
                     </section>
                 </aside>
 
 
-                <section class="productSide">
-                    <section id = "productList"class="productMenu">
-                        <select class="productChoices">
+                <section class="product-side">
+                    <section id = "productList"class="product-menu">
+                        <select class="product-choices" title="Select the category for Products">
                             
                         </select>
                     </section>
-                    <section class="productsClass"></section>
+                    <section class="products-class"></section>
                     
                 </section>
         </section>`;
         $(this.parent).html(markUp);
-        new  __WEBPACK_IMPORTED_MODULE_0__CategoriesComponent__["a" /* default */](".categoriesList");
-        new __WEBPACK_IMPORTED_MODULE_1__ProductComponent__["a" /* default */](".productsClass",this.id);
+        new  __WEBPACK_IMPORTED_MODULE_0__CategoriesComponent__["a" /* default */](".product-categories-list");
+        new __WEBPACK_IMPORTED_MODULE_1__ProductComponent__["a" /* default */](".products-class",this.id);
         $('#productList').on('change',this.changeURL);
         
 
@@ -554,7 +555,7 @@ class CategoriesComponent{
                 return 1;
             return 0;
         }
-        $(".productChoices").html(`<option value=""></option>`);
+        $(".product-choices").html(`<option value=""></option>`);
         $('#productList :selected').text(sessionStorage.selectedText);
         this.shoppingCartService.getCategoriesData().then((result)=>{
             result.sort(compare);
@@ -563,13 +564,13 @@ class CategoriesComponent{
                 let flag=`${categoryData.enabled}`;
                 if(flag=="true"){
                     let markup =
-                    `<article class="categoriesName">
+                    `<article class="product-categories-name">
                         <a href = "#/products/${categoryData.id}">${categoryData.name}</a>
                     </article>`;
 
-                    let optionMarkup =`<option class="categoryOptions" value ="#/products/${categoryData.id}">${categoryData.name}</option>`
+                    let optionMarkup =`<option class="product-category-options" value ="#/products/${categoryData.id}">${categoryData.name}</option>`
                     $(this.parent).append(markup);
-                    $(".productChoices").append(optionMarkup);
+                    $(".product-choices").append(optionMarkup);
                 }
             });
         });
@@ -599,10 +600,8 @@ class ProductComponent{
     render(){
         const context={context:this};
 
-        //$(this.parent).html('');
         this.shoppingCartService.getProductsData(this.id).then((result)=>{
             result.forEach(productData => {
-                //const context={context:productData};
                 let markup = this.returnMarkup(productData);
                 if(this.id!=0 && this.id==productData.category){
                     $(this.parent).append(markup);
@@ -611,8 +610,8 @@ class ProductComponent{
                 }
                 let addToCart=function(){
                     let newVal=this.context.Utils.addToCart(productData); 
-                    $(".cartItemCount").html(`(${newVal.totalQty} Items)`);
-                    $(".mainHeaderQty").html(`${newVal.totalQty} Items`)
+                    $(".cart-item-count").html(`(${newVal.totalQty} Items)`);
+                    $(".main-header-qty").html(`${newVal.totalQty} Items`)
                 }
                 let boundFunc=addToCart.bind(context);
                 $('#add_'+`${productData.id}`).on('click',boundFunc);
@@ -620,25 +619,24 @@ class ProductComponent{
         }); 
     }
     returnMarkup(productData){
-        return `<section class= "productContainer">
-        <p class="productName">${productData.name}</p>
-        <section class='divAlignment'>
-        <section class="productImageContainer">
-            <img class="productImage" src = "${productData.imageURL}" alt="">
+        return `<section class= "product-container">
+        <p class="product-name">${productData.name}</p>
+        <section class='div-alignment'>
+        <section class="product-image-container">
+            <img class="product-image" src = "${productData.imageURL}" alt="">
         </section>
-        <section class ="descriptionAlignment">
-        <section class="descriptionContainer">
-        <p class="productDescription">${productData.description}</p>
+        <section class ="product-description-alignment">
+        <section class="product-description-container">
+        <p class="product-description">${productData.description}</p>
         </section>
-        <article class="mrpandbuy">
-            <p class="mrp">MRP Rs.${productData.price}</p>
-            <button class="productBuy" id="add_${productData.id}" type="button">Buy Now <span class="priceTag">@Rs.${productData.price}</span></button>
+        <article class="product-mrpandbuy">
+            <p class="product-mrp">MRP Rs.${productData.price}</p>
+            <button class="product-buy-button" id="add_${productData.id}" type="button">Buy Now <span class="product-price-tag">@Rs.${productData.price}</span></button>
         </article>
         
         </section>
         </section>
-        </section>
-        `;
+        </section>`;
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = ProductComponent;
@@ -661,54 +659,54 @@ class CartComponent{
         this.render();
     }
     render(){
-        let markUp = `
-        <div class= "cartBackground">
-        <div class="overlay-content">
-        <main class="cartContainer">
-        <section class="cartHeader">
-                <article class="cartInfo">
-                    <h1 class="cartItemLabel">My Cart  &nbsp;</h1><h3 class="cartItemCount"></h3>
+        let markUp = 
+        `<div class= "cart-background">
+        <div class="cart-overlay-content">
+        <main class="cart-container">
+        <section class="cart-header">
+                <article class="cart-info">
+                    <h1 class="cart-item-label">My Cart  &nbsp;</h1><h2 class="cart-item-count"></h2>
                 </article>
-                <article class="close">&times;</article>
+                <article class="cart-close-button">&times;</article>
             </section>
-            <section class="cartItemContainer"></section>
+            <section class="cart-item-container"></section>
         </main>
-        <footer class="cartFooter">
+        <footer class="cart-footer">
         </footer>
         </div>
         </div>`;
         
         $(this.parent).html(markUp);
-        $('.close').on('click',()=>{
-            $('.cartBackground')[0].style.display ="none";
+        $('.cart-close-button').on('click',()=>{
+            $('.cart-background')[0].style.display ="none";
             history.back();
         });
         
         if(JSON.parse(sessionStorage.getItem("cartItems")) && JSON.parse(sessionStorage.getItem("cartItems")).length > 0){
             let bannerMarkup= 
-                `<section class="discountBanner" role="banner">
-                    <article class="discountLogo">
+                `<section class="cart-discount-banner" role="banner">
+                    <article class="cart-discount-logo">
                         <img src="static/images/lowest-price.png" alt="">
                     </article>
-                    <article class="discountBannerText">
+                    <article class="cart-discount-banner-text">
                         You won't find it cheaper anywhere
                     </article>
                 </section>`;
             let footerMarkup = 
                 `<p>Promo code can be applied on payment page</p>
-                <a class="showTotals" href="#"><span>Proceed to checkout</span>
+                <a class="cart-show-totals" href="#"><span>Proceed to checkout</span>
                 <span id="cartTotal"> </span></a>`;
             
-            $(".cartContainer").append(bannerMarkup);
-            $(".cartFooter").append(footerMarkup);
-            new __WEBPACK_IMPORTED_MODULE_0__CartItemComponent__["a" /* default */](".cartItemContainer");
-
+            $(".cart-container").append(bannerMarkup);
+            $(".cart-footer").append(footerMarkup);
+            new __WEBPACK_IMPORTED_MODULE_0__CartItemComponent__["a" /* default */](".cart-item-container");
         }
         else{
             let emptyMarkup=this.Utils.getEmptyCartMarkup();
-            $(".cartItemContainer").replaceWith(emptyMarkup);
+            $(".cart-item-container").replaceWith(emptyMarkup);
+            
             let footerMarkup = this.Utils.getEmptyCartFooterMarkup();
-            $(".cartFooter").html(footerMarkup);
+            $(".cart-footer").html(footerMarkup);
         }
     }
 }
@@ -744,21 +742,21 @@ class CartItemComponent{
                 totalQty += items[i].qty;
 
                 let markUp=
-                    `<section class="cartItem" id="cartItem_${productData.id}">
-                        <article class="cartItemImage">
-                            <img src="${productData.imageURL}"/>
+                    `<section class="cart-item" id="cartItem_${productData.id}">
+                        <article class="cart-item-image">
+                            <img src="${productData.imageURL}" alt=""/>
                         </article>
-                        <article class="cartItemText">
+                        <article class="cart-item-text">
                             <h1>${productData.name}</h1>
                             <p>
-                                <span class="leftCalc">  
-                                    <span class="cartButton" id="cartMinus_${productData.id}">-</span>
+                                <span class="cart-item-leftsection">  
+                                    <span class="cart-button" id="cartMinus_${productData.id}">-</span>
                                     <span id="itemQty_${productData.id}">${productData.qty}</span>
-                                    <span class="cartButton" id="cartAdd_${productData.id}">+</span>
+                                    <span class="cart-button" id="cartAdd_${productData.id}">+</span>
                                         X  <span>Rs. ${productData.price}</span>
                                 </span>   
-                                <span class="rightCalc">    
-                                <span class="grand-total" id="grandTotal_${productData.id}">Rs. ${grandTotal}</span>
+                                <span class="cart-item-rightsection">    
+                                <span class="cart-grand-total" id="grandTotal_${productData.id}">Rs. ${grandTotal}</span>
                                 </span>  
                             </p>
                         </article>
@@ -771,8 +769,8 @@ class CartItemComponent{
                     $("#grandTotal_"+`${productData.id}`).html('Rs. '+newVal.itemCost);
                     let megaTotal = this.Utils.findTotalCost();
                     $("#cartTotal").html("Rs. "+megaTotal + ">");
-                    $(".cartItemCount").html(`(${newVal.totalQty} Items)`);
-                    $(".mainHeaderQty").html(`${newVal.totalQty} Items`);
+                    $(".cart-item-count").html(`(${newVal.totalQty} Items)`);
+                    $(".main-header-qty").html(`${newVal.totalQty} Items`);
                 }
                 let boundFuncAdd=addToCart.bind(this);
                 $('#cartAdd_'+`${productData.id}`).on('click',boundFuncAdd);
@@ -788,23 +786,23 @@ class CartItemComponent{
                     else{
                         if(newVal.last){
                             let emptyMarkup=this.Utils.getEmptyCartMarkup();
-                            $(".cartItemContainer").replaceWith(emptyMarkup);
-                            $(".discountBanner").replaceWith('');
+                            $(".cart-item-container").replaceWith(emptyMarkup);
+                            $(".cart-discount-banner").replaceWith('');
                             let footerMarkup = this.Utils.getEmptyCartFooterMarkup();
-                            $(".cartFooter").html(footerMarkup);
+                            $(".cart-footer").html(footerMarkup);
                         }else{
                             $("#cartItem_"+`${productData.id}`).html('');
                         } 
                     }
-                    $(".cartItemCount").html(`(${newVal.totalQty} Items)`);
-                    $(".mainHeaderQty").html(`${newVal.totalQty} Items`);
+                    $(".cart-item-count").html(`(${newVal.totalQty} Items)`);
+                    $(".main-header-qty").html(`${newVal.totalQty} Items`);
                 }
                 let boundFuncMinus=minusFromCart.bind(this);
                 $('#cartMinus_'+`${productData.id}`).on('click',boundFuncMinus);
             }
         }
-        $(".cartItemCount").html(`(${totalQty} Items)`);
-        $(".mainHeaderQty").html(`${totalQty} Items`);
+        $(".cart-item-count").html(`(${totalQty} Items)`);
+        $(".main-header-qty").html(`${totalQty} Items`);
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = CartItemComponent;
@@ -825,23 +823,23 @@ class SigninComponent{
     
     render(){
         let markUp=`
-        <section class="screenContainer">
-        <section class="leftScreen">
+        <section class="sign-screen-container">
+        <section class="sign-screen-left">
             <h1>Login</h1>
             <p>Get access to your Orders, Wishlist and Recommendations</p>
         </section>
-        <section class="rightScreen">
+        <section class="sign-screen-right">
             <form action="">
-                <article class="textField">
-                    <input type="email" class="inputField" required/>
-                    <span class="floating-label">Email</span>
+                <article class="sign-screen-text-field">
+                    <input type="email" id="email_signin" class="sign-screen-input-field" required/>
+                    <label for="email_signin" class="floating-label">Email</label>
                 </article>
-                <article class="textField">
-                    <input type="password" class="inputField" required/>
-                    <span class="floating-label">Password</span>
+                <article class="sign-screen-text-field">
+                    <input type="password" placeholder=" " id="password_signin" class="sign-screen-input-field" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$" required/>
+                    <label for="password_signin"  class="floating-label">Password</label>
                 </article>
                 <article>
-                    <a href="">Login</a>
+                    <a href="" id="login">Login</a>
                 </article>
             </form>
         </section></section>`;
@@ -866,44 +864,41 @@ class SignupComponent{
     
     render(){
         let markUp=`
-        <section class="screenContainer">
-        <section class="leftScreen">
+        <section class="sign-screen-container">
+        <section class="sign-screen-left">
                         <h1>Signup</h1>
                         <p>We do not share your personal details with anyone.</p>
                 </section>
                 
-                <section class="rightScreen">
+                <section class="sign-screen-right">
                         <form action="">
-                            <article class="textField">
-                                <input type="text" class="inputField" required/>
-                                <span class="floating-label">First Name</span>
+                            <article class="sign-screen-text-field">
+                                <input type="text" id="first_name" class="sign-screen-input-field" required/>
+                                <label for="first_name" class="floating-label">First Name</label>
                             </article>
     
-                            <article class="textField">
-                                <input type="text" class="inputField" required/>
-                                <span class="floating-label">Last Name</span>
+                            <article class="sign-screen-text-field">
+                                <input type="text" id="last_name" class="sign-screen-input-field" required/>
+                                <label for="last_name" class="floating-label">Last Name</label>
                             </article>
                             
-                            <article class="textField">
-                                <input type="email" class="inputField" required/>
-                                <span class="floating-label">Email</span>
+                            <article class="sign-screen-text-field">
+                                <input type="email" id="email_signup" class="sign-screen-input-field" required/>
+                                <label for="email_signup" class="floating-label">Email</label>
                             </article>
     
-                            <article class="textField">
-                                <input type="password" class="inputField" required/>
-                                <span class="floating-label">Password</span>
-                            </article>
-
-                            <article class="textField">
-                                <input type="password" class="inputField" required/>
-                                <span class="floating-label">Confirm Password</span>
+                            <article class="sign-screen-text-field">
+                                <input type="password" placeholder=" " id="password_signup" class="sign-screen-input-field" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$" required/>
+                                <label for="password_signup" class="floating-label">Password</label>
                             </article>
 
-                           <article>
-                               <a href="">Signup</a>
-                           </article>
-    
-    
+                            <article class="sign-screen-text-field">
+                                <input type="password" id="confirm_signup" class="sign-screen-input-field" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$" required/>
+                                <label for="confirm_signup" class="floating-label">Confirm Password</label>
+                            </article>
+                            <article>
+                                <a href="">Signup</a>
+                            </article>
                         </form>
                 </section>
         </section>`;

@@ -1,14 +1,5 @@
-/* img{
-  width :100%;
-} */
-/* Fading animation */
 * {
   box-sizing: border-box;
-}
-
-.suggestions {
-  flex: 40%;
-  margin-top: 15%;
 }
 
 .slideshow-container {
@@ -26,7 +17,7 @@ header.carouselHead {
   margin-top: 3%;
 }
 
-.mySlides {
+.carousel-slides {
   display: none;
   width: 90%;
   margin-left: 5%;
@@ -69,47 +60,9 @@ header.carouselHead {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
-.text {
-  color: #f2f2f2;
-  font-size: 15px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
-  text-align: center;
-}
-
 .imageDiv {
   margin: 10%;
   margin-top: 5%;
-}
-
-.carouselPrice {
-  text-align: center;
-  font-size: 2em;
-}
-
-.viewDetailContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.viewDetails {
-  background: none;
-  border: 1px solid lightgrey;
-  text-align: center;
-  margin: 0 auto;
-  margin-bottom: 10%;
-  margin-top: 10%;
-  background-color: white;
-  color: gray;
-  width: 60%;
-  box-sizing: content-box;
-  padding-top: 5%;
-  padding-bottom: 5%;
-  font-size: 1em;
-  font-weight: bold;
 }
 
 .fade {
@@ -119,7 +72,7 @@ header.carouselHead {
   animation-duration: 1.5s;
 }
 
-.carouselDots {
+.carousel-dots {
   text-align: center;
   padding-bottom: 2%;
 }

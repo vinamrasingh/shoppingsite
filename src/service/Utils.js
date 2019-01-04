@@ -88,14 +88,14 @@ export default class  Utils{
     }
     getEmptyCartMarkup(){
         let emptyMarkup=`
-                <section class="cartEmpty">
+                <section class="cart-empty">
                 <p>No items in your cart</p>
                 <p>Your favourite items are just a click away.
                 </section>`;
         return emptyMarkup;
     }
     getEmptyCartFooterMarkup(){
-        let footerMarkup = `<a class = "startShopping" href="#"><span>Start Shopping</span></a>`;
+        let footerMarkup = `<a class = "cart-start-shopping" href="#"><span>Start Shopping</span></a>`;
         return footerMarkup;
     }
     findTotalCost(){

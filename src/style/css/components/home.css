@@ -1,14 +1,14 @@
-.bannerContainer {
+.banner-container {
   display: flex;
   flex-direction: row;
   margin: 2% auto;
 }
 
-.bannerContainer:nth-child(4n+1) .imageContainer {
+.banner-container:nth-child(4n+1) .banner-image-container {
   order: 2;
 }
 
-.bannerContentContainer {
+.banner-content-container {
   flex: 60%;
   display: flex;
   flex-direction: column;
@@ -17,24 +17,24 @@
   text-align: center;
 }
 
-.imageContainer {
+.banner-image-container {
   flex: 40%;
   align-items: center;
   display: flex;
 }
 
-.bannerImage {
+.banner-image {
   width: 100%;
 }
 
-.bannerButton {
+.banner-button {
   background-color: #BD2A57;
   color: white;
   padding: 3%;
   border: none;
 }
 
-.categoryBorder {
+.banner-shadow {
   background: radial-gradient(at 50% 0, #8a8888, transparent 50%);
   background-size: 100% 8px;
   background-repeat: no-repeat;

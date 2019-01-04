@@ -21,17 +21,17 @@ export default class CarouselComponent{
             
             
         </div>
-        <div class ="carouselDots">
+        <div class ="carousel-dots">
             
         </div>`;
         $(this.parent).append(markUp);
-        let c=1
+        let c=1;
         result.forEach(carouselImage => {
 
             new ImageCarouselComponent('#carouselImage', carouselImage);
 
             let dotMarkup=`<span class="dot" id="dot_${c}"></span>`;
-            $('.carouselDots').append(dotMarkup);
+            $('.carousel-dots').append(dotMarkup);
             $('#dot_'+`${c}`).on('click',{"counter":c},self.currentSlide);
             c++;
 
@@ -55,7 +55,7 @@ export default class CarouselComponent{
 
     showSlides(n) {
         var i;
-        var slides = document.getElementsByClassName("mySlides");
+        var slides = document.getElementsByClassName("carousel-slides");
         var dots = document.getElementsByClassName("dot");
         if (n > slides.length) {self.slideIndex = 1} 
         if (n < 1) {self.slideIndex = slides.length}

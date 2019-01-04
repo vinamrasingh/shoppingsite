@@ -4,9 +4,11 @@
 
 a {
   text-decoration: none;
+  cursor: pointer;
+  color: black;
 }
 
-.headerClass {
+.header-class {
   width: 100%;
   padding-left: 1%;
   padding-right: 1%;
@@ -14,51 +16,51 @@ a {
   flex-direction: row;
 }
 @media (min-width: 990px) {
-  .headerClass {
+  .header-class {
     width: 100%;
     padding-left: 10%;
     padding-right: 10%;
   }
 }
-.headerClass .logoSection {
+.header-class .header-logo-section {
   flex: 70%;
 }
-.headerClass .logoSection a {
+.header-class .header-logo-section a {
   width: 100%;
 }
-.headerClass .logoSection a img {
+.header-class .header-logo-section a img {
   width: 35%;
 }
 @media (min-width: 990px) {
-  .headerClass .logoSection {
+  .header-class .header-logo-section {
     flex: 10%;
   }
-  .headerClass .logoSection a {
+  .header-class .header-logo-section a {
     width: 100%;
   }
-  .headerClass .logoSection a img {
+  .header-class .header-logo-section a img {
     width: 100%;
   }
 }
-.headerClass .rightSection {
+.header-class .header-right-section {
   flex: 20%;
 }
 @media (min-width: 990px) {
-  .headerClass .rightSection {
+  .header-class .header-right-section {
     flex: 80%;
   }
 }
-.headerClass .rightSection .rightTopSection {
+.header-class .header-right-section .header-right-top-section {
   display: none;
 }
 @media (min-width: 990px) {
-  .headerClass .rightSection .rightTopSection {
+  .header-class .header-right-section .header-right-top-section {
     display: flex;
     justify-content: flex-end;
     margin: 1%;
   }
 }
-.headerClass .rightSection .rightBottomSection {
+.header-class .header-right-section .header-right-bottom-section {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -66,50 +68,50 @@ a {
   height: 100%;
 }
 @media (min-width: 990px) {
-  .headerClass .rightSection .rightBottomSection {
+  .header-class .header-right-section .header-right-bottom-section {
     align-items: end;
     height: 54%;
   }
 }
-.headerClass .rightSection .rightBottomSection .navSection {
+.header-class .header-right-section .header-right-bottom-section .header-nav-section {
   display: none;
 }
 @media (min-width: 990px) {
-  .headerClass .rightSection .rightBottomSection .navSection {
+  .header-class .header-right-section .header-right-bottom-section .header-nav-section {
     display: flex;
     margin-left: 5%;
     flex: 89%;
   }
-  .headerClass .rightSection .rightBottomSection .navSection a {
+  .header-class .header-right-section .header-right-bottom-section .header-nav-section a {
     margin-left: 5%;
   }
 }
-.headerClass .rightSection .rightBottomSection .cartSection {
+.header-class .header-right-section .header-right-bottom-section .header-cart-section {
   display: flex;
   background: lightgray;
   flex-direction: row;
   flex: auto;
   height: inherit;
 }
-.headerClass .rightSection .rightBottomSection .cartSection a {
+.header-class .header-right-section .header-right-bottom-section .header-cart-section a {
   align-items: center;
   display: flex;
   justify-content: center;
 }
-.headerClass .rightSection .rightBottomSection .cartSection a img {
+.header-class .header-right-section .header-right-bottom-section .header-cart-section a img {
   width: 35%;
 }
 @media (min-width: 990px) {
-  .headerClass .rightSection .rightBottomSection .cartSection {
+  .header-class .header-right-section .header-right-bottom-section .header-cart-section {
     flex: 15%;
     align-items: center;
     height: 100%;
   }
-  .headerClass .rightSection .rightBottomSection .cartSection a {
+  .header-class .header-right-section .header-right-bottom-section .header-cart-section a {
     height: inherit;
     width: 100%;
   }
-  .headerClass .rightSection .rightBottomSection .cartSection a img {
+  .header-class .header-right-section .header-right-bottom-section .header-cart-section a img {
     height: 70%;
   }
 }
@@ -142,12 +144,8 @@ a {
   }
 }
 
-.boxShadow {
+.header-box-shadow {
   box-shadow: 2px 13px 12px -6px #ccc;
-}
-
-.productMenu {
-  display: none;
 }
 
 /*# sourceMappingURL=base.css.map */

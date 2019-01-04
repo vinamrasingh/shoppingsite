@@ -1,20 +1,20 @@
 $color_1: white;
 $background_color_1: #BD2A57;
 
-.bannerContainer {
+.banner-container {
 	display: flex;
 	flex-direction: row;
 	margin: 2% auto;
 }
 
-.bannerContainer {
+.banner-container {
 	&:nth-child(4n+1) {
-		.imageContainer {
+		.banner-image-container {
 			order: 2;
 		}
 	}
 }
-.bannerContentContainer {
+.banner-content-container {
 	flex: 60%;
 	display: flex;
 	flex-direction: column;
@@ -22,21 +22,21 @@ $background_color_1: #BD2A57;
 	align-items: center;
 	text-align: center;
 }
-.imageContainer {
+.banner-image-container {
 	flex: 40%;
 	align-items: center;
 	display: flex;
 }
-.bannerImage {
+.banner-image {
 	width: 100%;
 }
-.bannerButton {
+.banner-button {
 	background-color: $background_color_1;
 	color: $color_1;
 	padding: 3%;
 	border: none;
 }
-.categoryBorder{
+.banner-shadow{
 	background: radial-gradient(at 50% 0,rgb(138,136,136),transparent 50%);
 	background-size:100% 8px;
 	background-repeat:no-repeat;

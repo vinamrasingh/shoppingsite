@@ -14,7 +14,7 @@ export default class CategoriesComponent{
                 return 1;
             return 0;
         }
-        $(".productChoices").html(`<option value=""></option>`);
+        $(".product-choices").html(`<option value=""></option>`);
         $('#productList :selected').text(sessionStorage.selectedText);
         this.shoppingCartService.getCategoriesData().then((result)=>{
             result.sort(compare);
@@ -23,13 +23,13 @@ export default class CategoriesComponent{
                 let flag=`${categoryData.enabled}`;
                 if(flag=="true"){
                     let markup =
-                    `<article class="categoriesName">
+                    `<article class="product-categories-name">
                         <a href = "#/products/${categoryData.id}">${categoryData.name}</a>
                     </article>`;
 
-                    let optionMarkup =`<option class="categoryOptions" value ="#/products/${categoryData.id}">${categoryData.name}</option>`
+                    let optionMarkup =`<option class="product-category-options" value ="#/products/${categoryData.id}">${categoryData.name}</option>`
                     $(this.parent).append(markup);
-                    $(".productChoices").append(optionMarkup);
+                    $(".product-choices").append(optionMarkup);
                 }
             });
         });

@@ -20,21 +20,21 @@ export default class CartItemComponent{
                 totalQty += items[i].qty;
 
                 let markUp=
-                    `<section class="cartItem" id="cartItem_${productData.id}">
-                        <article class="cartItemImage">
-                            <img src="${productData.imageURL}"/>
+                    `<section class="cart-item" id="cartItem_${productData.id}">
+                        <article class="cart-item-image">
+                            <img src="${productData.imageURL}" alt=""/>
                         </article>
-                        <article class="cartItemText">
+                        <article class="cart-item-text">
                             <h1>${productData.name}</h1>
                             <p>
-                                <span class="leftCalc">  
-                                    <span class="cartButton" id="cartMinus_${productData.id}">-</span>
+                                <span class="cart-item-leftsection">  
+                                    <span class="cart-button" id="cartMinus_${productData.id}">-</span>
                                     <span id="itemQty_${productData.id}">${productData.qty}</span>
-                                    <span class="cartButton" id="cartAdd_${productData.id}">+</span>
+                                    <span class="cart-button" id="cartAdd_${productData.id}">+</span>
                                         X  <span>Rs. ${productData.price}</span>
                                 </span>   
-                                <span class="rightCalc">    
-                                <span class="grand-total" id="grandTotal_${productData.id}">Rs. ${grandTotal}</span>
+                                <span class="cart-item-rightsection">    
+                                <span class="cart-grand-total" id="grandTotal_${productData.id}">Rs. ${grandTotal}</span>
                                 </span>  
                             </p>
                         </article>
@@ -47,8 +47,8 @@ export default class CartItemComponent{
                     $("#grandTotal_"+`${productData.id}`).html('Rs. '+newVal.itemCost);
                     let megaTotal = this.Utils.findTotalCost();
                     $("#cartTotal").html("Rs. "+megaTotal + ">");
-                    $(".cartItemCount").html(`(${newVal.totalQty} Items)`);
-                    $(".mainHeaderQty").html(`${newVal.totalQty} Items`);
+                    $(".cart-item-count").html(`(${newVal.totalQty} Items)`);
+                    $(".main-header-qty").html(`${newVal.totalQty} Items`);
                 }
                 let boundFuncAdd=addToCart.bind(this);
                 $('#cartAdd_'+`${productData.id}`).on('click',boundFuncAdd);
@@ -64,22 +64,22 @@ export default class CartItemComponent{
                     else{
                         if(newVal.last){
                             let emptyMarkup=this.Utils.getEmptyCartMarkup();
-                            $(".cartItemContainer").replaceWith(emptyMarkup);
-                            $(".discountBanner").replaceWith('');
+                            $(".cart-item-container").replaceWith(emptyMarkup);
+                            $(".cart-discount-banner").replaceWith('');
                             let footerMarkup = this.Utils.getEmptyCartFooterMarkup();
-                            $(".cartFooter").html(footerMarkup);
+                            $(".cart-footer").html(footerMarkup);
                         }else{
                             $("#cartItem_"+`${productData.id}`).html('');
                         } 
                     }
-                    $(".cartItemCount").html(`(${newVal.totalQty} Items)`);
-                    $(".mainHeaderQty").html(`${newVal.totalQty} Items`);
+                    $(".cart-item-count").html(`(${newVal.totalQty} Items)`);
+                    $(".main-header-qty").html(`${newVal.totalQty} Items`);
                 }
                 let boundFuncMinus=minusFromCart.bind(this);
                 $('#cartMinus_'+`${productData.id}`).on('click',boundFuncMinus);
             }
         }
-        $(".cartItemCount").html(`(${totalQty} Items)`);
-        $(".mainHeaderQty").html(`${totalQty} Items`);
+        $(".cart-item-count").html(`(${totalQty} Items)`);
+        $(".main-header-qty").html(`${totalQty} Items`);
     }
 }

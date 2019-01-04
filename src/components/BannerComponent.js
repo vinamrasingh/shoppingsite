@@ -22,15 +22,15 @@ export default class BannerComponent{
                 let flag=`${bannerData.enabled}`;
                 if(flag=="true"){
                     let markup =
-                    `<div class= "categoryBorder">&nbsp;</div>
-                    <section role="banner" class="bannerContainer effect">
-                        <article class= "imageContainer" >
-                            <img class = "bannerImage" src="${bannerData.imageUrl}" alt="">
+                    `<div class= "banner-shadow">&nbsp;</div>
+                    <section role="banner" class="banner-container effect">
+                        <article class= "banner-image-container" >
+                            <img class = "banner-image" src="${bannerData.imageUrl}" alt="">
                         </article>
-                        <article class="bannerContentContainer">
+                        <article class="banner-content-container">
                             <h3>${bannerData.name}</h3>
                             <p>${bannerData.description}</p>
-                            <a class="bannerButton" href="#/products/${bannerData.id}">Explore ${bannerData.key}</a>
+                            <a class="banner-button" href="#/products/${bannerData.id}">Explore ${bannerData.key}</a>
                         </article>
                                            
                     </section>

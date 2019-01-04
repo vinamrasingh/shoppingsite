@@ -11,25 +11,25 @@ export default class ProductPage{
     
     render(){
         let markUp=`<section class="grid-container">
-        <aside class="categoriesClass">
-                    <section class="categoriesList">
+        <aside class="product-categories-class">
+                    <section class="product-categories-list">
                     </section>
                 </aside>
 
 
-                <section class="productSide">
-                    <section id = "productList"class="productMenu">
-                        <select class="productChoices">
+                <section class="product-side">
+                    <section id = "productList"class="product-menu">
+                        <select class="product-choices" title="Select the category for Products">
                             
                         </select>
                     </section>
-                    <section class="productsClass"></section>
+                    <section class="products-class"></section>
                     
                 </section>
         </section>`;
         $(this.parent).html(markUp);
-        new  CategoriesComponent(".categoriesList");
-        new ProductComponent(".productsClass",this.id);
+        new  CategoriesComponent(".product-categories-list");
+        new ProductComponent(".products-class",this.id);
         $('#productList').on('change',this.changeURL);
         
 

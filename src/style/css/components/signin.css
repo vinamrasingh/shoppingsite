@@ -1,36 +1,36 @@
-.screenContainer {
+.sign-screen-container {
   margin-left: 13%;
   display: flex;
   flex-direction: row;
 }
-.screenContainer .leftScreen {
+.sign-screen-container .sign-screen-left {
   margin: 3%;
 }
-.screenContainer .leftScreen h1 {
+.sign-screen-container .sign-screen-left h1 {
   font-size: 240%;
 }
-.screenContainer .leftScreen h1, .screenContainer .leftScreen p {
+.sign-screen-container .sign-screen-left h1, .sign-screen-container .sign-screen-left p {
   padding: 3% 0;
   display: block;
 }
-.screenContainer .rightScreen {
+.sign-screen-container .sign-screen-right {
   margin: 2% 0;
 }
-.screenContainer .rightScreen form article {
+.sign-screen-container .sign-screen-right form article {
   margin: 3% 0;
 }
-.screenContainer .rightScreen form article .inputField {
+.sign-screen-container .sign-screen-right form article .sign-screen-input-field {
   border: none;
   border-bottom: 2px solid #cccccc;
   padding-left: 5%;
   background-color: inherit;
   background-image: none;
 }
-.screenContainer .rightScreen form article .inputField :focus {
+.sign-screen-container .sign-screen-right form article .sign-screen-input-field :focus {
   border: none;
   border-bottom: 2px solid #cccccc;
 }
-.screenContainer .rightScreen form article a {
+.sign-screen-container .sign-screen-right form article a {
   background-color: #BD2A57;
   display: block;
   color: #ffffff;
@@ -38,23 +38,32 @@
   padding: 3%;
   text-decoration: none;
 }
-.screenContainer .rightScreen input:focus ~ .floating-label,
-.screenContainer .rightScreen input:not(:focus):valid ~ .floating-label {
+.sign-screen-container .sign-screen-right input:focus ~ .floating-label,
+.sign-screen-container .sign-screen-right input:not(:focus):not(:placeholder-shown):valid ~ .floating-label {
   top: 8px;
   bottom: 10px;
   left: 20px;
   font-size: 11px;
   opacity: 1;
 }
-.screenContainer .rightScreen .inputField {
+.sign-screen-container .sign-screen-right input:focus:required:invalid {
+  border: 2px solid red;
+}
+.sign-screen-container .sign-screen-right input:required:valid {
+  border: none;
+}
+.sign-screen-container .sign-screen-right form:invalid > #login {
+  pointer-events: none;
+}
+.sign-screen-container .sign-screen-right .sign-screen-input-field {
   font-size: 14px;
   width: 400px;
   height: 65px;
 }
-.screenContainer .rightScreen .textField {
+.sign-screen-container .sign-screen-right .sign-screen-text-field {
   position: relative;
 }
-.screenContainer .rightScreen .floating-label {
+.sign-screen-container .sign-screen-right .floating-label {
   position: absolute;
   pointer-events: none;
   left: 20px;

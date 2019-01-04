@@ -12,9 +12,11 @@ $desktop:990px;
 }
 a {
 	text-decoration: none;
+	cursor: pointer;
+	color: black;
 }
 
-.headerClass{
+.header-class{
 	width:100%;
 	padding-left: 1%;
 	padding-right: 1%;
@@ -26,7 +28,7 @@ a {
 		padding-left:10%;
 		padding-right: 10%;
 	}
-	.logoSection{
+	.header-logo-section{
 		flex: 70%;
 		a{
 			width: 100%;
@@ -45,14 +47,14 @@ a {
 			}
 		}
 	}
-	.rightSection{
+	.header-right-section{
 		flex: 20%;
 		@include desktop(){
 			flex:80%;
 		}
 		
 
-		.rightTopSection{
+		.header-right-top-section{
 			display :none;
 
 			@include desktop(){
@@ -61,7 +63,7 @@ a {
 				margin: 1%;
 			}
 		}
-		.rightBottomSection{
+		.header-right-bottom-section{
 			display: flex;
 			flex-direction: row;
 			justify-content: space-between;
@@ -71,7 +73,7 @@ a {
 				align-items: end;
 				height: 54%;
 			}
-			.navSection{
+			.header-nav-section{
 				display: none;
 
 				@include desktop(){
@@ -84,7 +86,7 @@ a {
 				}
 				
 			}
-			.cartSection{
+			.header-cart-section{
 				display: flex;
 				background: lightgray;
 				flex-direction: row;
@@ -143,9 +145,6 @@ a {
     
 }
 
-.boxShadow{
+.header-box-shadow{
 	box-shadow: 2px 13px 12px -6px #ccc;
-}
-.productMenu{
-	display: none;
 }
