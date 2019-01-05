@@ -30,12 +30,16 @@ export default class BannerComponent{
                         <article class="banner-content-container">
                             <h3>${bannerData.name}</h3>
                             <p>${bannerData.description}</p>
-                            <a class="banner-button" href="#/products/${bannerData.id}">Explore ${bannerData.key}</a>
+                            <a class="banner-button" name= "${bannerData.name}" id="bannerButton_${bannerData.id}" href="#/products/${bannerData.id}">Explore ${bannerData.key}</a>
                         </article>
                                            
                     </section>
                     `;
                     $(this.parent).append(markup);
+                    
+                    $("#bannerButton_"+`${bannerData.id}`).on('click',(e)=>{
+                        sessionStorage.selectedText=e.target.attributes.name.value;
+                    });
                 }
             });
         });

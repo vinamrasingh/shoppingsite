@@ -355,12 +355,16 @@ class BannerComponent{
                         <article class="banner-content-container">
                             <h3>${bannerData.name}</h3>
                             <p>${bannerData.description}</p>
-                            <a class="banner-button" href="#/products/${bannerData.id}">Explore ${bannerData.key}</a>
+                            <a class="banner-button" name= "${bannerData.name}" id="bannerButton_${bannerData.id}" href="#/products/${bannerData.id}">Explore ${bannerData.key}</a>
                         </article>
                                            
                     </section>
                     `;
                     $(this.parent).append(markup);
+                    
+                    $("#bannerButton_"+`${bannerData.id}`).on('click',(e)=>{
+                        sessionStorage.selectedText=e.target.attributes.name.value;
+                    });
                 }
             });
         });
@@ -567,10 +571,11 @@ class CategoriesComponent{
                     `<article class="product-categories-name">
                         <a href = "#/products/${categoryData.id}">${categoryData.name}</a>
                     </article>`;
-
-                    let optionMarkup =`<option class="product-category-options" value ="#/products/${categoryData.id}">${categoryData.name}</option>`
                     $(this.parent).append(markup);
-                    $(".product-choices").append(optionMarkup);
+                    if(sessionStorage.selectedText!=categoryData.name){
+                        let optionMarkup =`<option class="product-category-options" value ="#/products/${categoryData.id}">${categoryData.name}</option>`;
+                        $(".product-choices").append(optionMarkup);
+                    }
                 }
             });
         });
@@ -660,7 +665,7 @@ class CartComponent{
     }
     render(){
         let markUp = 
-        `<div class= "cart-background">
+        `<div class= "cart-background" role="dialog">
         <div class="cart-overlay-content">
         <main class="cart-container">
         <section class="cart-header">
@@ -681,6 +686,8 @@ class CartComponent{
             $('.cart-background')[0].style.display ="none";
             history.back();
         });
+
+        
         
         if(JSON.parse(sessionStorage.getItem("cartItems")) && JSON.parse(sessionStorage.getItem("cartItems")).length > 0){
             let bannerMarkup= 
@@ -708,6 +715,7 @@ class CartComponent{
             let footerMarkup = this.Utils.getEmptyCartFooterMarkup();
             $(".cart-footer").html(footerMarkup);
         }
+        $(".cart-footer a").focus();
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = CartComponent;
@@ -829,20 +837,24 @@ class SigninComponent{
             <p>Get access to your Orders, Wishlist and Recommendations</p>
         </section>
         <section class="sign-screen-right">
-            <form action="">
+            <form action="/#">
                 <article class="sign-screen-text-field">
-                    <input type="email" id="email_signin" class="sign-screen-input-field" required/>
+                    <input type="email" id="email_signin" placeholder=" " class="sign-screen-input-field" required/>
                     <label for="email_signin" class="floating-label">Email</label>
+                    <div class="requirements">Must be a valid email address.</div>
                 </article>
                 <article class="sign-screen-text-field">
-                    <input type="password" placeholder=" " id="password_signin" class="sign-screen-input-field" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$" required/>
+                    <input type="password" placeholder=" " id="password_signin" class="sign-screen-input-field" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$" required/>
                     <label for="password_signin"  class="floating-label">Password</label>
+                    <div class="requirements">Your password must be at least 6 characters as well as contain at least one character and one number.</div>
                 </article>
                 <article>
-                    <a href="" id="login">Login</a>
+                    <!--<a href="" id="login" class="disabled">Login</a>-->
+                    <input type="submit" value="Login" class="submit-button"/>
                 </article>
             </form>
-        </section></section>`;
+        </section>
+        </section>`;
         $(this.parent).html(markUp);
     }
 }
@@ -871,38 +883,54 @@ class SignupComponent{
                 </section>
                 
                 <section class="sign-screen-right">
-                        <form action="">
+                        <form action="/#">
                             <article class="sign-screen-text-field">
-                                <input type="text" id="first_name" class="sign-screen-input-field" required/>
+                                <input type="text" id="first_name" placeholder=" " class="sign-screen-input-field" required/>
                                 <label for="first_name" class="floating-label">First Name</label>
                             </article>
     
                             <article class="sign-screen-text-field">
-                                <input type="text" id="last_name" class="sign-screen-input-field" required/>
+                                <input type="text" id="last_name" placeholder=" " class="sign-screen-input-field" required/>
                                 <label for="last_name" class="floating-label">Last Name</label>
                             </article>
                             
                             <article class="sign-screen-text-field">
-                                <input type="email" id="email_signup" class="sign-screen-input-field" required/>
+                                <input type="email" id="email_signup" placeholder=" " class="sign-screen-input-field" required/>
                                 <label for="email_signup" class="floating-label">Email</label>
+                                <div class="requirements">Must be a valid email address.</div>
                             </article>
     
                             <article class="sign-screen-text-field">
-                                <input type="password" placeholder=" " id="password_signup" class="sign-screen-input-field" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$" required/>
+                                <input type="password" placeholder=" " id="password_signup" class="sign-screen-input-field" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$" required/>
                                 <label for="password_signup" class="floating-label">Password</label>
+                                <div class="requirements">Your password must be at least 6 characters as well as contain at least one character and one number.</div>
                             </article>
 
                             <article class="sign-screen-text-field">
-                                <input type="password" id="confirm_signup" class="sign-screen-input-field" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$" required/>
+                                <input type="password" id="confirm_signup" placeholder=" " class="sign-screen-input-field" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$" required/>
                                 <label for="confirm_signup" class="floating-label">Confirm Password</label>
+                                <div class="requirements">Your password must be at least 6 characters as well as contain at least one character and one number.</div>
                             </article>
                             <article>
-                                <a href="">Signup</a>
+                                <input type="submit" value="Signup" class="submit-button"/>
                             </article>
                         </form>
                 </section>
         </section>`;
         $(this.parent).html(markUp);
+        let password=document.getElementById("password_signup");
+        let confirm_password = document.getElementById("confirm_signup");
+
+        let validatePassword= function(){
+            if(password.value != confirm_password.value) {
+              confirm_password.setCustomValidity("Passwords Don't Match");
+            } else {
+              confirm_password.setCustomValidity('');
+            }
+          }
+          
+          password.onchange = validatePassword;
+          confirm_password.onkeyup = validatePassword;
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = SignupComponent;

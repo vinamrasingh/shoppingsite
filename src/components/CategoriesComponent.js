@@ -26,10 +26,11 @@ export default class CategoriesComponent{
                     `<article class="product-categories-name">
                         <a href = "#/products/${categoryData.id}">${categoryData.name}</a>
                     </article>`;
-
-                    let optionMarkup =`<option class="product-category-options" value ="#/products/${categoryData.id}">${categoryData.name}</option>`
                     $(this.parent).append(markup);
-                    $(".product-choices").append(optionMarkup);
+                    if(sessionStorage.selectedText!=categoryData.name){
+                        let optionMarkup =`<option class="product-category-options" value ="#/products/${categoryData.id}">${categoryData.name}</option>`;
+                        $(".product-choices").append(optionMarkup);
+                    }
                 }
             });
         });

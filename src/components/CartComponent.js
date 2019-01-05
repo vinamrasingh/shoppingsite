@@ -9,7 +9,7 @@ export default class CartComponent{
     }
     render(){
         let markUp = 
-        `<div class= "cart-background">
+        `<div class= "cart-background" role="dialog">
         <div class="cart-overlay-content">
         <main class="cart-container">
         <section class="cart-header">
@@ -30,6 +30,8 @@ export default class CartComponent{
             $('.cart-background')[0].style.display ="none";
             history.back();
         });
+
+        
         
         if(JSON.parse(sessionStorage.getItem("cartItems")) && JSON.parse(sessionStorage.getItem("cartItems")).length > 0){
             let bannerMarkup= 
@@ -57,5 +59,6 @@ export default class CartComponent{
             let footerMarkup = this.Utils.getEmptyCartFooterMarkup();
             $(".cart-footer").html(footerMarkup);
         }
+        $(".cart-footer a").focus();
     }
 }
