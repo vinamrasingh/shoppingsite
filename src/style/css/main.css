@@ -753,6 +753,7 @@ header.carouselHead {
   padding-left: 5%;
   background-color: inherit;
   background-image: none;
+  outline: none;
 }
 .sign-screen-container .sign-screen-right form article .sign-screen-input-field :focus {
   border: none;

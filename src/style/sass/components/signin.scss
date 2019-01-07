@@ -31,12 +31,13 @@
                 padding-left: 5%;
                 background-color: inherit;
                 background-image: none;
+                
 
                 :focus
                 {
                     border:none;
                     border-bottom: 2px solid #cccccc;
-                
+                    outline: none;
                 }
             }
 
@@ -101,7 +102,6 @@
             transition: 0.2s ease all;
         }
         .requirements {
-           
             color: #999;
             max-height: 0;
             max-width: 400px;

@@ -16,12 +16,12 @@ export default class SigninComponent{
         <section class="sign-screen-right">
             <form action="/#">
                 <article class="sign-screen-text-field">
-                    <input type="email" id="email_signin" placeholder=" " class="sign-screen-input-field" required/>
+                    <input type="email" id="email_signin"  autocomplete = "off" placeholder=" " class="sign-screen-input-field" required/>
                     <label for="email_signin" class="floating-label">Email</label>
                     <div class="requirements">Must be a valid email address.</div>
                 </article>
                 <article class="sign-screen-text-field">
-                    <input type="password" placeholder=" " id="password_signin" class="sign-screen-input-field" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$" required/>
+                    <input type="password" autocomplete = "off" placeholder=" " id="password_signin" class="sign-screen-input-field" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$" minlength=6 required/>
                     <label for="password_signin"  class="floating-label">Password</label>
                     <div class="requirements">Your password must be at least 6 characters as well as contain at least one character and one number.</div>
                 </article>
